@@ -149,7 +149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 609658113, guid: 31a06acdb2cf9064a94ee7f80a878815, type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< Updated upstream
       value: 40
+=======
+      value: 51.787
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 609658113, guid: 31a06acdb2cf9064a94ee7f80a878815, type: 3}
       propertyPath: m_LocalRotation.w
@@ -387,10 +391,17 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 1179991396}
   - component: {fileID: 1179991395}
   - component: {fileID: 1179991394}
   m_Layer: 0
+=======
+  - component: {fileID: 1002535878}
+  - component: {fileID: 1002535877}
+  - component: {fileID: 1002535876}
+  m_Layer: 3
+>>>>>>> Stashed changes
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +487,30 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 609658111, guid: 31a06acdb2cf9064a94ee7f80a878815, type: 3}
   m_PrefabInstance: {fileID: 301780948}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!136 &1851420715
+=======
+--- !u!114 &1609699692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609699691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1e0c1c949694b50bfbf1856c424362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  turnSpeed: 20
+  groundCheckDistance: 0.1
+  jumpForce: 5
+  ground:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!136 &1609699693
+>>>>>>> Stashed changes
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -525,6 +559,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
+<<<<<<< Updated upstream
   m_CollisionDetection: 1
 --- !u!114 &1851420717
 MonoBehaviour:
@@ -540,6 +575,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   turnSpeed: 20
+=======
+  m_CollisionDetection: 0
+>>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
