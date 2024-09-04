@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -389,10 +389,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a525ded9765ff704ab92492a49b2254e, type: 3}
+  m_Script: {fileID: 11500000, guid: ae40af7bf96d155409fb25846e72432c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 3.5
+  mouseSensitivity: 10
   player: {fileID: 1609699691}
 --- !u!1 &1002535875
 GameObject:
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 1002535878}
   - component: {fileID: 1002535877}
   - component: {fileID: 1002535876}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,11 +500,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1609699691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aa937116d37edc449604717dc281e71, type: 3}
+  m_Script: {fileID: 11500000, guid: 6eeee47587418c34886c05e776a72eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 5
   turnSpeed: 20
+  groundCheckDistance: 0.1
+  jumpForce: 5
+  Ground:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!136 &1609699693
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -581,7 +586,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1830206752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e0936b399134c444adec3ea2eb2f5d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0529dd0355c23fa429f5025749cc10a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1830206754
