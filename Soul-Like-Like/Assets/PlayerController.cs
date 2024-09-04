@@ -46,10 +46,10 @@ public class PlayerController : MonoBehaviour
         transform.position += movement * moveSpeed * Time.deltaTime;
 
         // 이동 애니메이션
-        if (Input.GetMouseButton(1)) // 우클릭이 눌려있을 때
+        if (Input.GetMouseButton(1) && movement != Vector3.zero) // 우클릭이 눌려있을 때
         {
-            anim.SetBool("BlockingRun", true); // 이동 중이면 BlockingRun 애니메이션 실행
             anim.SetBool("Running", false); // Running 애니메이션 비활성화
+            anim.SetBool("BlockingRun", true); // 이동 중이면 BlockingRun 애니메이션 실행
         }
         else // 우클릭이 눌려있지 않을 때
         {
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     
     void GroundCheck()
     {
-        // 플레이어의 위치에서, 아래방향으로, groundDistance 만큼 ray를 쏴서, ground 레이어가 있는지 검사
+        // 플레이어의 위치에서, 아래방향으로, groundCheckDistance 만큼 ray를 쏴서, Ground 레이어가 있는지 검사
         if (Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, Ground))
         {
             isGrounded = true;
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. from: Unity Script
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. From: Unity Script
             anim.SetTrigger("Jumping");
         }
     }
@@ -90,20 +90,23 @@ public class PlayerController : MonoBehaviour
     
     void Block()
     {
-        if (Input.GetMouseButton(1)) // 오른쪽 마우스 버튼을 누를 때
+        if (Input.GetMouseButton(1) && movement == Vector3.zero) // 정지 상태에서 오른쪽 마우스 버튼을 누를 때
         {
             anim.SetBool("Blocking", true);
 
             if (movement != Vector3.zero) // 움직임이 있을 때
             {
+                anim.SetBool("Blocking", false);
                 anim.SetBool("BlockingRun", true); // BlockingRun 애니메이션 활성화
             }
             else
             {
                 anim.SetBool("BlockingRun", false); // 움직임이 없을 때 BlockingRun 비활성화
+                anim.SetBool("Blocking", true);
             }
         }
-        else if (Input.GetMouseButtonUp(1)) // 오른쪽 마우스 버튼을 뗄 때
+        
+        if (Input.GetMouseButtonUp(1)) // 오른쪽 마우스 버튼을 뗄 때
         {
             anim.SetBool("Blocking", false);
             anim.SetBool("BlockingRun", false); // 방어를 해제할 때 BlockingRun도 비활성화
