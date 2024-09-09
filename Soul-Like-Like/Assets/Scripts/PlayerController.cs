@@ -11,10 +11,15 @@ public class PlayerController : MonoBehaviour
     public float groundCheckDistance = 0.1f;
     public float jumpForce = 5f;
     public LayerMask Ground;
+
     private Vector3 movement;
+    private Vector3 movementVertical;
+    private Vector3 movementHorizontal;
     
     Rigidbody rb;
     Animator anim;
+
+    public GameObject Camera;
     
     // Start is called before the first frame update
     void Start()
@@ -41,8 +46,14 @@ public class PlayerController : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
 
         // 벡터의 정규화를 통해서 모든 방향의 이동속도를 동일하게 만든다.
-        movement = new Vector3(horizontal, 0, vertical).normalized;
-        
+        // movement = new Vector3(horizontal, 0, vertical).normalized;
+        movementVertical = Vector3.Normalize(new Vector3(this.transform.position.x - Camera.transform.position.x, 0, this.transform.position.z - Camera.transform.position.z)) * vertical;
+        movementHorizontal = Vector3.Normalize(new Vector3(Camera.transform.position.y - this.transform.position.y, 0, Camera.transform.position.x - this.transform.position.x)) * horizontal;
+
+        Debug.Log(movement);
+
+        movement = movementVertical + movementHorizontal;
+
         transform.position += movement * moveSpeed * Time.deltaTime;
 
         // 이동 애니메이션
