@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 609658113, guid: 31a06acdb2cf9064a94ee7f80a878815, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 609658113, guid: 31a06acdb2cf9064a94ee7f80a878815, type: 3}
       propertyPath: m_LocalPosition.z
@@ -423,10 +423,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8091224525d19f47b082ed3bbf9570d, type: 3}
+  m_Script: {fileID: 11500000, guid: c715fba2a4f488a4190cfb9706fb7261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 4
+  mouseSensitivity: 1
   playerCenter: {fileID: 421632057}
 --- !u!1 &1002535875
 GameObject:
@@ -534,11 +534,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1609699691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ae16b125233f8f419bb004d59a5bf31, type: 3}
+  m_Script: {fileID: 11500000, guid: f90e97d08a325fe4da0b0c02a42fe7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  turnSpeed: 5
+  turnSpeed: 35
   groundCheckDistance: 0.1
   jumpForce: 5
   Ground:
@@ -564,10 +564,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 2
+  m_Radius: 0.2990381
+  m_Height: 1.9385083
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.9480593, z: 0.00000017881393}
 --- !u!54 &1609699694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -593,7 +593,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &1609699696 stripped
 Transform:
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1830206752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c21f264c26b6a4a86f3529c06dc1d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f9db92232c969a49a2f78faebdb8dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1830206754

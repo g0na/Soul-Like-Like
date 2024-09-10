@@ -5,7 +5,7 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float turnSpeed = 5f;
+    public float turnSpeed = 50f;
 
     private bool isGrounded;
     public float groundCheckDistance = 0.1f;
@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GroundCheck();
-        
         Move();
         Jump();
         Block();
@@ -54,6 +53,17 @@ public class PlayerController : MonoBehaviour
 
         movement = movementVertical + movementHorizontal;
 
+        if (!isGrounded)
+        {
+            moveSpeed = 1f;
+            turnSpeed = 2.5f;
+        }
+        else
+        {
+            moveSpeed = 5f;
+            turnSpeed = 50f;
+        }
+        
         transform.position += movement * moveSpeed * Time.deltaTime;
 
         // 이동 애니메이션
