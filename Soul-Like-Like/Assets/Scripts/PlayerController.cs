@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float turnSpeed = 50f;
 
+    [SerializeField]
     private bool isGrounded;
+
     public float groundCheckDistance = 0.1f;
-    public float jumpForce = 5f;
+    public float jumpForce = 20f;
     public LayerMask Ground;
 
     private Vector3 movement;
@@ -47,9 +49,13 @@ public class PlayerController : MonoBehaviour
         // 벡터의 정규화를 통해서 모든 방향의 이동속도를 동일하게 만든다.
         // movement = new Vector3(horizontal, 0, vertical).normalized;
         movementVertical = Vector3.Normalize(new Vector3(this.transform.position.x - Camera.transform.position.x, 0, this.transform.position.z - Camera.transform.position.z)) * vertical;
-        movementHorizontal = Vector3.Normalize(new Vector3(Camera.transform.position.y - this.transform.position.y, 0, Camera.transform.position.x - this.transform.position.x)) * horizontal;
 
-        Debug.Log(movement);
+        Vector3 arrangedTransformPosition = new Vector3(this.transform.position.x, 0, this.transform.position.z);
+        Vector3 arrangedCameraPostion = new Vector3(Camera.transform.position.x, 0, Camera.transform.position.z);
+
+        movementHorizontal = Vector3.Normalize(Vector3.Cross(arrangedCameraPostion- arrangedTransformPosition,this.transform.position - arrangedTransformPosition )) * horizontal;
+
+        Vector3.Cross(movementVertical, movementHorizontal);
 
         movement = movementVertical + movementHorizontal;
 
@@ -83,6 +89,14 @@ public class PlayerController : MonoBehaviour
         {
             Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up); // 해당 방향을 바라봄
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime); // 부드러운 회전
+        }
+    }
+
+    void Gravity()
+    {
+        if (!isGrounded)
+        {
+            transform.Translate(Vector3.down * 0.02f);
         }
     }
     
