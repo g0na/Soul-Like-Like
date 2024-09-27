@@ -1,193 +1,563 @@
 fileFormatVersion: 2
 guid: dce3705594394934a8c2c0fe127dea6b
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Chest
-    100002: Eye_L
-    100004: Eye_R
-    100006: Eyebrow_1_L
-    100008: Eyebrow_1_R
-    100010: Eyebrow_L
-    100012: Eyebrow_R
-    100014: Foot_L
-    100016: Foot_R
-    100018: hand_L
-    100020: hand_R
-    100022: Head
-    100024: Hips
-    100026: Index_1_L
-    100028: Index_1_R
-    100030: Index_2_L
-    100032: Index_2_R
-    100034: Index_L
-    100036: Index_R
-    100038: Jaw
-    100040: Lower_Arm_L
-    100042: Lower_Arm_R
-    100044: Lower_Eye_Lid_L
-    100046: Lower_Eye_Lid_R
-    100048: Lower_Leg_L
-    100050: Lower_Leg_R
-    100052: Lower_Lip
-    100054: Lower_Lip_L
-    100056: Lower_Lip_R
-    100058: Middle_1_L
-    100060: Middle_1_R
-    100062: Middle_2_L
-    100064: Middle_2_R
-    100066: Middle_L
-    100068: Middle_R
-    100070: muscle_buccinator_L
-    100072: muscle_buccinator_R
-    100074: Neck
-    100076: Nose
-    100078: Nose_L
-    100080: Nose_R
-    100082: Pinky_1_L
-    100084: Pinky_1_R
-    100086: Pinky_2_L
-    100088: Pinky_2_R
-    100090: Pinky_L
-    100092: Pinky_R
-    100094: Rig
-    100096: Ring_1_L
-    100098: Ring_1_R
-    100100: Ring_2_L
-    100102: Ring_2_R
-    100104: Ring_L
-    100106: Ring_R
-    100108: Shoulder_L
-    100110: Shoulder_R
-    100112: Solus Knight
-    100114: //RootNode
-    100116: Spine
-    100118: Spine 1
-    100120: Thumb_1_L
-    100122: Thumb_1_R
-    100124: Thumb_2_L
-    100126: Thumb_2_R
-    100128: Thumb_L
-    100130: Thumb_R
-    100132: Toes_L
-    100134: Toes_R
-    100136: tongue
-    100138: Upper_Arm_L
-    100140: Upper_Arm_R
-    100142: Upper_Eye_Lid_L
-    100144: Upper_Eye_Lid_R
-    100146: Upper_Leg_L
-    100148: Upper_Leg_R
-    100150: Upper_LIp
-    100152: Upper_LIp_L
-    100154: Upper_LIp_R
-    400000: Chest
-    400002: Eye_L
-    400004: Eye_R
-    400006: Eyebrow_1_L
-    400008: Eyebrow_1_R
-    400010: Eyebrow_L
-    400012: Eyebrow_R
-    400014: Foot_L
-    400016: Foot_R
-    400018: hand_L
-    400020: hand_R
-    400022: Head
-    400024: Hips
-    400026: Index_1_L
-    400028: Index_1_R
-    400030: Index_2_L
-    400032: Index_2_R
-    400034: Index_L
-    400036: Index_R
-    400038: Jaw
-    400040: Lower_Arm_L
-    400042: Lower_Arm_R
-    400044: Lower_Eye_Lid_L
-    400046: Lower_Eye_Lid_R
-    400048: Lower_Leg_L
-    400050: Lower_Leg_R
-    400052: Lower_Lip
-    400054: Lower_Lip_L
-    400056: Lower_Lip_R
-    400058: Middle_1_L
-    400060: Middle_1_R
-    400062: Middle_2_L
-    400064: Middle_2_R
-    400066: Middle_L
-    400068: Middle_R
-    400070: muscle_buccinator_L
-    400072: muscle_buccinator_R
-    400074: Neck
-    400076: Nose
-    400078: Nose_L
-    400080: Nose_R
-    400082: Pinky_1_L
-    400084: Pinky_1_R
-    400086: Pinky_2_L
-    400088: Pinky_2_R
-    400090: Pinky_L
-    400092: Pinky_R
-    400094: Rig
-    400096: Ring_1_L
-    400098: Ring_1_R
-    400100: Ring_2_L
-    400102: Ring_2_R
-    400104: Ring_L
-    400106: Ring_R
-    400108: Shoulder_L
-    400110: Shoulder_R
-    400112: Solus Knight
-    400114: //RootNode
-    400116: Spine
-    400118: Spine 1
-    400120: Thumb_1_L
-    400122: Thumb_1_R
-    400124: Thumb_2_L
-    400126: Thumb_2_R
-    400128: Thumb_L
-    400130: Thumb_R
-    400132: Toes_L
-    400134: Toes_R
-    400136: tongue
-    400138: Upper_Arm_L
-    400140: Upper_Arm_R
-    400142: Upper_Eye_Lid_L
-    400144: Upper_Eye_Lid_R
-    400146: Upper_Leg_L
-    400148: Upper_Leg_R
-    400150: Upper_LIp
-    400152: Upper_LIp_L
-    400154: Upper_LIp_R
-    2100000: Solus_Knight
-    4300000: Solus Knight
-    7400000: Rig|default
-    7400002: Rig|knight_attack_2_heavy_weapon
-    7400004: Rig|knight_attack_3_heavy_weapon
-    7400006: Rig|knight_block_2_weapon
-    7400008: Rig|knight_front_attacked_fall
-    7400010: Rig|knight_hurt_left
-    7400012: Rig|knight_idle
-    7400014: Rig|knight_idle_2_weapon
-    7400016: Rig|knight_idle_heavy_weapon
-    7400018: Rig|knight_jump_up_root
-    7400020: Rig|knight_left_attacked_fall
-    7400022: Rig|knight_right_attacked_fall
-    7400024: Rig|knight_run_heavy_weapon_in_place
-    7400026: Rig|knight_run_shield
-    7400028: Rig|knight_shield_attack
-    7400030: Rig|knight_shield_block
-    7400032: Rig|knight_standard
-    7400034: Rig|knight_turn_right_heavy_weapon
-    7400036: Rig|knight_walk_2_root
-    7400038: Rig|knight_walk_heavy_weapon_root
-    7400040: Rig|knight_walk_in_place
-    7400042: t-pose
-    7400044: Rig|knight_walk_shieldblock_root
-    7400046: Rig|two_weapon_tornado
-    9500000: //RootNode
-    13700000: Solus Knight
-    2186277476908879412: ImportLogs
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Chest
+  - first:
+      1: 100002
+    second: Eye_L
+  - first:
+      1: 100004
+    second: Eye_R
+  - first:
+      1: 100006
+    second: Eyebrow_1_L
+  - first:
+      1: 100008
+    second: Eyebrow_1_R
+  - first:
+      1: 100010
+    second: Eyebrow_L
+  - first:
+      1: 100012
+    second: Eyebrow_R
+  - first:
+      1: 100014
+    second: Foot_L
+  - first:
+      1: 100016
+    second: Foot_R
+  - first:
+      1: 100018
+    second: hand_L
+  - first:
+      1: 100020
+    second: hand_R
+  - first:
+      1: 100022
+    second: Head
+  - first:
+      1: 100024
+    second: Hips
+  - first:
+      1: 100026
+    second: Index_1_L
+  - first:
+      1: 100028
+    second: Index_1_R
+  - first:
+      1: 100030
+    second: Index_2_L
+  - first:
+      1: 100032
+    second: Index_2_R
+  - first:
+      1: 100034
+    second: Index_L
+  - first:
+      1: 100036
+    second: Index_R
+  - first:
+      1: 100038
+    second: Jaw
+  - first:
+      1: 100040
+    second: Lower_Arm_L
+  - first:
+      1: 100042
+    second: Lower_Arm_R
+  - first:
+      1: 100044
+    second: Lower_Eye_Lid_L
+  - first:
+      1: 100046
+    second: Lower_Eye_Lid_R
+  - first:
+      1: 100048
+    second: Lower_Leg_L
+  - first:
+      1: 100050
+    second: Lower_Leg_R
+  - first:
+      1: 100052
+    second: Lower_Lip
+  - first:
+      1: 100054
+    second: Lower_Lip_L
+  - first:
+      1: 100056
+    second: Lower_Lip_R
+  - first:
+      1: 100058
+    second: Middle_1_L
+  - first:
+      1: 100060
+    second: Middle_1_R
+  - first:
+      1: 100062
+    second: Middle_2_L
+  - first:
+      1: 100064
+    second: Middle_2_R
+  - first:
+      1: 100066
+    second: Middle_L
+  - first:
+      1: 100068
+    second: Middle_R
+  - first:
+      1: 100070
+    second: muscle_buccinator_L
+  - first:
+      1: 100072
+    second: muscle_buccinator_R
+  - first:
+      1: 100074
+    second: Neck
+  - first:
+      1: 100076
+    second: Nose
+  - first:
+      1: 100078
+    second: Nose_L
+  - first:
+      1: 100080
+    second: Nose_R
+  - first:
+      1: 100082
+    second: Pinky_1_L
+  - first:
+      1: 100084
+    second: Pinky_1_R
+  - first:
+      1: 100086
+    second: Pinky_2_L
+  - first:
+      1: 100088
+    second: Pinky_2_R
+  - first:
+      1: 100090
+    second: Pinky_L
+  - first:
+      1: 100092
+    second: Pinky_R
+  - first:
+      1: 100094
+    second: Rig
+  - first:
+      1: 100096
+    second: Ring_1_L
+  - first:
+      1: 100098
+    second: Ring_1_R
+  - first:
+      1: 100100
+    second: Ring_2_L
+  - first:
+      1: 100102
+    second: Ring_2_R
+  - first:
+      1: 100104
+    second: Ring_L
+  - first:
+      1: 100106
+    second: Ring_R
+  - first:
+      1: 100108
+    second: Shoulder_L
+  - first:
+      1: 100110
+    second: Shoulder_R
+  - first:
+      1: 100112
+    second: Solus Knight
+  - first:
+      1: 100114
+    second: //RootNode
+  - first:
+      1: 100116
+    second: Spine
+  - first:
+      1: 100118
+    second: Spine 1
+  - first:
+      1: 100120
+    second: Thumb_1_L
+  - first:
+      1: 100122
+    second: Thumb_1_R
+  - first:
+      1: 100124
+    second: Thumb_2_L
+  - first:
+      1: 100126
+    second: Thumb_2_R
+  - first:
+      1: 100128
+    second: Thumb_L
+  - first:
+      1: 100130
+    second: Thumb_R
+  - first:
+      1: 100132
+    second: Toes_L
+  - first:
+      1: 100134
+    second: Toes_R
+  - first:
+      1: 100136
+    second: tongue
+  - first:
+      1: 100138
+    second: Upper_Arm_L
+  - first:
+      1: 100140
+    second: Upper_Arm_R
+  - first:
+      1: 100142
+    second: Upper_Eye_Lid_L
+  - first:
+      1: 100144
+    second: Upper_Eye_Lid_R
+  - first:
+      1: 100146
+    second: Upper_Leg_L
+  - first:
+      1: 100148
+    second: Upper_Leg_R
+  - first:
+      1: 100150
+    second: Upper_LIp
+  - first:
+      1: 100152
+    second: Upper_LIp_L
+  - first:
+      1: 100154
+    second: Upper_LIp_R
+  - first:
+      4: 400000
+    second: Chest
+  - first:
+      4: 400002
+    second: Eye_L
+  - first:
+      4: 400004
+    second: Eye_R
+  - first:
+      4: 400006
+    second: Eyebrow_1_L
+  - first:
+      4: 400008
+    second: Eyebrow_1_R
+  - first:
+      4: 400010
+    second: Eyebrow_L
+  - first:
+      4: 400012
+    second: Eyebrow_R
+  - first:
+      4: 400014
+    second: Foot_L
+  - first:
+      4: 400016
+    second: Foot_R
+  - first:
+      4: 400018
+    second: hand_L
+  - first:
+      4: 400020
+    second: hand_R
+  - first:
+      4: 400022
+    second: Head
+  - first:
+      4: 400024
+    second: Hips
+  - first:
+      4: 400026
+    second: Index_1_L
+  - first:
+      4: 400028
+    second: Index_1_R
+  - first:
+      4: 400030
+    second: Index_2_L
+  - first:
+      4: 400032
+    second: Index_2_R
+  - first:
+      4: 400034
+    second: Index_L
+  - first:
+      4: 400036
+    second: Index_R
+  - first:
+      4: 400038
+    second: Jaw
+  - first:
+      4: 400040
+    second: Lower_Arm_L
+  - first:
+      4: 400042
+    second: Lower_Arm_R
+  - first:
+      4: 400044
+    second: Lower_Eye_Lid_L
+  - first:
+      4: 400046
+    second: Lower_Eye_Lid_R
+  - first:
+      4: 400048
+    second: Lower_Leg_L
+  - first:
+      4: 400050
+    second: Lower_Leg_R
+  - first:
+      4: 400052
+    second: Lower_Lip
+  - first:
+      4: 400054
+    second: Lower_Lip_L
+  - first:
+      4: 400056
+    second: Lower_Lip_R
+  - first:
+      4: 400058
+    second: Middle_1_L
+  - first:
+      4: 400060
+    second: Middle_1_R
+  - first:
+      4: 400062
+    second: Middle_2_L
+  - first:
+      4: 400064
+    second: Middle_2_R
+  - first:
+      4: 400066
+    second: Middle_L
+  - first:
+      4: 400068
+    second: Middle_R
+  - first:
+      4: 400070
+    second: muscle_buccinator_L
+  - first:
+      4: 400072
+    second: muscle_buccinator_R
+  - first:
+      4: 400074
+    second: Neck
+  - first:
+      4: 400076
+    second: Nose
+  - first:
+      4: 400078
+    second: Nose_L
+  - first:
+      4: 400080
+    second: Nose_R
+  - first:
+      4: 400082
+    second: Pinky_1_L
+  - first:
+      4: 400084
+    second: Pinky_1_R
+  - first:
+      4: 400086
+    second: Pinky_2_L
+  - first:
+      4: 400088
+    second: Pinky_2_R
+  - first:
+      4: 400090
+    second: Pinky_L
+  - first:
+      4: 400092
+    second: Pinky_R
+  - first:
+      4: 400094
+    second: Rig
+  - first:
+      4: 400096
+    second: Ring_1_L
+  - first:
+      4: 400098
+    second: Ring_1_R
+  - first:
+      4: 400100
+    second: Ring_2_L
+  - first:
+      4: 400102
+    second: Ring_2_R
+  - first:
+      4: 400104
+    second: Ring_L
+  - first:
+      4: 400106
+    second: Ring_R
+  - first:
+      4: 400108
+    second: Shoulder_L
+  - first:
+      4: 400110
+    second: Shoulder_R
+  - first:
+      4: 400112
+    second: Solus Knight
+  - first:
+      4: 400114
+    second: //RootNode
+  - first:
+      4: 400116
+    second: Spine
+  - first:
+      4: 400118
+    second: Spine 1
+  - first:
+      4: 400120
+    second: Thumb_1_L
+  - first:
+      4: 400122
+    second: Thumb_1_R
+  - first:
+      4: 400124
+    second: Thumb_2_L
+  - first:
+      4: 400126
+    second: Thumb_2_R
+  - first:
+      4: 400128
+    second: Thumb_L
+  - first:
+      4: 400130
+    second: Thumb_R
+  - first:
+      4: 400132
+    second: Toes_L
+  - first:
+      4: 400134
+    second: Toes_R
+  - first:
+      4: 400136
+    second: tongue
+  - first:
+      4: 400138
+    second: Upper_Arm_L
+  - first:
+      4: 400140
+    second: Upper_Arm_R
+  - first:
+      4: 400142
+    second: Upper_Eye_Lid_L
+  - first:
+      4: 400144
+    second: Upper_Eye_Lid_R
+  - first:
+      4: 400146
+    second: Upper_Leg_L
+  - first:
+      4: 400148
+    second: Upper_Leg_R
+  - first:
+      4: 400150
+    second: Upper_LIp
+  - first:
+      4: 400152
+    second: Upper_LIp_L
+  - first:
+      4: 400154
+    second: Upper_LIp_R
+  - first:
+      21: 2100000
+    second: Solus_Knight
+  - first:
+      43: 4300000
+    second: Solus Knight
+  - first:
+      74: 7400000
+    second: Rig|default
+  - first:
+      74: 7400002
+    second: Rig|knight_attack_2_heavy_weapon
+  - first:
+      74: 7400004
+    second: Rig|knight_attack_3_heavy_weapon
+  - first:
+      74: 7400006
+    second: Rig|knight_block_2_weapon
+  - first:
+      74: 7400008
+    second: Rig|knight_front_attacked_fall
+  - first:
+      74: 7400010
+    second: Rig|knight_hurt_left
+  - first:
+      74: 7400012
+    second: Rig|knight_idle
+  - first:
+      74: 7400014
+    second: Rig|knight_idle_2_weapon
+  - first:
+      74: 7400016
+    second: Rig|knight_idle_heavy_weapon
+  - first:
+      74: 7400018
+    second: Rig|knight_jump_up_root
+  - first:
+      74: 7400020
+    second: Rig|knight_left_attacked_fall
+  - first:
+      74: 7400022
+    second: Rig|knight_right_attacked_fall
+  - first:
+      74: 7400024
+    second: Rig|knight_run_heavy_weapon_in_place
+  - first:
+      74: 7400026
+    second: Rig|knight_run_shield
+  - first:
+      74: 7400028
+    second: Rig|knight_shield_attack
+  - first:
+      74: 7400030
+    second: Rig|knight_shield_block
+  - first:
+      74: 7400032
+    second: Rig|knight_standard
+  - first:
+      74: 7400034
+    second: Rig|knight_turn_right_heavy_weapon
+  - first:
+      74: 7400036
+    second: Rig|knight_walk_2_root
+  - first:
+      74: 7400038
+    second: Rig|knight_walk_heavy_weapon_root
+  - first:
+      74: 7400040
+    second: Rig|knight_walk_in_place
+  - first:
+      74: 7400042
+    second: t-pose
+  - first:
+      74: 7400044
+    second: Rig|knight_walk_shieldblock_root
+  - first:
+      74: 7400046
+    second: Rig|two_weapon_tornado
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Solus Knight
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -195,7 +565,7 @@ ModelImporter:
       name: Solus_Knight
     second: {fileID: 2100000, guid: 7a0d41d3aa864a84aaf7e22627838da2, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -204,6 +574,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -217,11 +588,11 @@ ModelImporter:
       DOF on avatar to improve retargeting quality.\n\t'Upper_Leg_L' has translation
       animation that will be discarded.\n\nClip 'Rig|knight_left_attacked_fall' has
       import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Upper_Leg_L' has
-      translation animation that will be discarded.\n\nClip 'Rig|knight_right_attacked_fall'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Upper_Leg_R' has
-      translation animation that will be discarded.\n\t'Upper_Leg_L' has translation
+      translation DOF on avatar to improve retargeting quality.\n\t'Upper_Leg_L'
+      has translation animation that will be discarded.\n\nClip 'Rig|knight_right_attacked_fall'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Upper_Leg_R'
+      has translation animation that will be discarded.\n\t'Upper_Leg_L' has translation
       animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
@@ -238,6 +609,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|default
       takeName: Rig|default
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -266,6 +638,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_attack_2_heavy_weapon
       takeName: Rig|knight_attack_2_heavy_weapon
+      internalID: 0
       firstFrame: 0
       lastFrame: 40
       wrapMode: 0
@@ -294,6 +667,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_attack_3_heavy_weapon
       takeName: Rig|knight_attack_3_heavy_weapon
+      internalID: 0
       firstFrame: 0
       lastFrame: 39
       wrapMode: 0
@@ -322,6 +696,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_block_2_weapon
       takeName: Rig|knight_block_2_weapon
+      internalID: 0
       firstFrame: 0
       lastFrame: 80
       wrapMode: 0
@@ -350,6 +725,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_front_attacked_fall
       takeName: Rig|knight_front_attacked_fall
+      internalID: 0
       firstFrame: 0
       lastFrame: 20
       wrapMode: 0
@@ -378,6 +754,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_hurt_left
       takeName: Rig|knight_hurt_left
+      internalID: 0
       firstFrame: 0
       lastFrame: 22
       wrapMode: 0
@@ -406,6 +783,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_idle
       takeName: Rig|knight_idle
+      internalID: 0
       firstFrame: 0
       lastFrame: 80
       wrapMode: 0
@@ -434,6 +812,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_idle_2_weapon
       takeName: Rig|knight_idle_2_weapon
+      internalID: 0
       firstFrame: 0
       lastFrame: 80
       wrapMode: 0
@@ -462,6 +841,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_idle_heavy_weapon
       takeName: Rig|knight_idle_heavy_weapon
+      internalID: 0
       firstFrame: 0
       lastFrame: 80
       wrapMode: 0
@@ -490,6 +870,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_jump_up_root
       takeName: Rig|knight_jump_up_root
+      internalID: 0
       firstFrame: 0
       lastFrame: 29
       wrapMode: 0
@@ -518,6 +899,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_left_attacked_fall
       takeName: Rig|knight_left_attacked_fall
+      internalID: 0
       firstFrame: 0
       lastFrame: 31
       wrapMode: 0
@@ -546,6 +928,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_right_attacked_fall
       takeName: Rig|knight_right_attacked_fall
+      internalID: 0
       firstFrame: 0
       lastFrame: 29
       wrapMode: 0
@@ -574,6 +957,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_run_heavy_weapon_in_place
       takeName: Rig|knight_run_heavy_weapon_in_place
+      internalID: 0
       firstFrame: 0
       lastFrame: 24
       wrapMode: 0
@@ -602,6 +986,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_run_shield
       takeName: Rig|knight_run_shield
+      internalID: 0
       firstFrame: 0
       lastFrame: 24
       wrapMode: 0
@@ -630,6 +1015,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_shield_attack
       takeName: Rig|knight_shield_attack
+      internalID: 0
       firstFrame: 0
       lastFrame: 35
       wrapMode: 0
@@ -658,6 +1044,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_shield_block
       takeName: Rig|knight_shield_block
+      internalID: 0
       firstFrame: 0
       lastFrame: 80
       wrapMode: 0
@@ -686,6 +1073,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_standard
       takeName: Rig|knight_standard
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -714,6 +1102,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_turn_right_heavy_weapon
       takeName: Rig|knight_turn_right_heavy_weapon
+      internalID: 0
       firstFrame: 0
       lastFrame: 40
       wrapMode: 0
@@ -742,6 +1131,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_walk_2_root
       takeName: Rig|knight_walk_2_root
+      internalID: 0
       firstFrame: 0
       lastFrame: 32
       wrapMode: 0
@@ -770,6 +1160,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_walk_heavy_weapon_root
       takeName: Rig|knight_walk_heavy_weapon_root
+      internalID: 0
       firstFrame: 0
       lastFrame: 40
       wrapMode: 0
@@ -798,6 +1189,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_walk_in_place
       takeName: Rig|knight_walk_in_place
+      internalID: 0
       firstFrame: 0
       lastFrame: 32
       wrapMode: 0
@@ -826,6 +1218,7 @@ ModelImporter:
     - serializedVersion: 16
       name: t-pose
       takeName: Rig|knight_walk_root_left
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -854,6 +1247,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|knight_walk_shieldblock_root
       takeName: Rig|knight_walk_shieldblock_root
+      internalID: 0
       firstFrame: 0
       lastFrame: 32
       wrapMode: 0
@@ -882,6 +1276,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|two_weapon_tornado
       takeName: Rig|two_weapon_tornado
+      internalID: 0
       firstFrame: 0
       lastFrame: 16
       wrapMode: 0
@@ -914,25 +1309,36 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -941,10 +1347,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: Hips
       humanName: Hips
@@ -1784,13 +2190,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

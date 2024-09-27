@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         Block();
-        
+        Dodge();
     }
 
     void Move()
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetKeyDown(KeyCode.F) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. From: Unity Script
             anim.SetTrigger("Jumping");
@@ -145,6 +145,14 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Blocking", false);
             anim.SetBool("BlockingRun", false); // 방어를 해제할 때 BlockingRun도 비활성화
+        }
+    }
+
+    void Dodge()
+    {
+        if (Input.GetButtonDown("Dodge") && isGrounded)
+        {
+            anim.SetTrigger("Dodging");
         }
     }
     
