@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isGrounded;
     [SerializeField]
+    private bool isJumping;
+    [SerializeField]
     private bool isDodging;
 
     public float groundCheckDistance = 0.1f;
@@ -52,20 +54,16 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        // 벡터의 정규화를 통해서 모든 방향의 이동속도를 동일하게 만든다.
-        // movement = new Vector3(horizontal, 0, vertical).normalized;
         movementVertical = Vector3.Normalize(new Vector3(this.transform.position.x - Camera.transform.position.x, 0, this.transform.position.z - Camera.transform.position.z)) * vertical;
 
         Vector3 arrangedTransformPosition = new Vector3(this.transform.position.x, 0, this.transform.position.z);
         Vector3 arrangedCameraPostion = new Vector3(Camera.transform.position.x, 0, Camera.transform.position.z);
 
-        movementHorizontal = Vector3.Normalize(Vector3.Cross(arrangedCameraPostion- arrangedTransformPosition,this.transform.position - arrangedTransformPosition )) * horizontal;
-
-        Vector3.Cross(movementVertical, movementHorizontal);
+        movementHorizontal = Vector3.Normalize(Vector3.Cross(arrangedCameraPostion - arrangedTransformPosition, this.transform.position - arrangedTransformPosition )) * horizontal;
 
         movement = movementVertical + movementHorizontal;
 
-        if (!isGrounded)
+        if (isJumping)
         {
             moveSpeed = 1f;
             turnSpeed = 2.5f;
@@ -97,20 +95,16 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime); // 부드러운 회전
         }
     }
-
-    void Gravity()
-    {
-        if (!isGrounded)
-        {
-            transform.Translate(Vector3.down * 0.02f);
-        }
-    }
     
     void GroundCheck()
     {
         // 플레이어의 위치에서, 아래방향으로, groundCheckDistance 만큼 ray를 쏴서, Ground 레이어가 있는지 검사
         if (Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, Ground))
         {
+            if(isJumping)
+            {
+                isJumping = false;
+            }
             isGrounded = true;
         }
         else
@@ -124,7 +118,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. From: Unity Script
-            anim.SetTrigger("Jumping");
+            isJumping = true;
+            anim.SetTrigger("Jumping");            
         }
     }
 
