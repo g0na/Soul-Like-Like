@@ -353,9 +353,8 @@
 -analyzer:"D:/Utility/Unity/HUb/Editor/2022.3.28f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"D:/Utility/Unity/HUb/Editor/2022.3.28f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Low Poly Knights/Scripts/cameraFollow.cs"
-"Assets/Scripts/CameraController.cs"
-"Assets/Scripts/GameManager.cs"
-"Assets/Scripts/PlayerController.cs"
+"Assets/PlayerController.cs"
+"Assets/Scripts/CameraManager.cs"
 -langversion:9.0
 /deterministic
 /optimize+
