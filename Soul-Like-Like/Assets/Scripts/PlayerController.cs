@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -6,9 +7,12 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float turnSpeed = 50f;
+    public float dodgeForce = 8f;
 
     [SerializeField]
     private bool isGrounded;
+    [SerializeField]
+    private bool isDodging;
 
     public float groundCheckDistance = 0.1f;
     public float jumpForce = 20f;
@@ -28,14 +32,16 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
         GroundCheck();
-        Move();
+        if (!isDodging)
+        {
+            Move();
+        }
         Jump();
         Block();
         Dodge();
@@ -147,13 +153,22 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("BlockingRun", false); // 방어를 해제할 때 BlockingRun도 비활성화
         }
     }
-
+    
     void Dodge()
     {
-        if (Input.GetButtonDown("Dodge") && isGrounded)
+        if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
         {
+            isDodging = true;
             anim.SetTrigger("Dodging");
+            rb.AddForce(transform.forward * dodgeForce, ForceMode.VelocityChange);
+            StartCoroutine(isPlayerDodge());
         }
+    }
+    
+    IEnumerator isPlayerDodge()
+    {
+        yield return new WaitForSeconds(0.9f);
+        isDodging = false;
     }
     
 }
