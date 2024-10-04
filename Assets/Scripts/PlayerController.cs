@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
@@ -5,9 +6,9 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float turnSpeed = 50f;
-    public float dodgeForce = 8f;
+    private float moveSpeed;
+    private float turnSpeed;
+    private float dodgeForce;
 
     [SerializeField]
     private bool isGrounded;
@@ -15,9 +16,13 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     [SerializeField]
     private bool isDodging;
+    [SerializeField] 
+    public Transform groundCheck;
 
-    public float groundCheckDistance = 0.1f;
-    public float jumpForce = 20f;
+    private RaycastHit slopeHit;
+    public float groundCheckDistance;
+    public float maxSlopeAngle = 60f;
+    public float jumpForce;
     public LayerMask Ground;
 
     private Vector3 movement;
@@ -47,6 +52,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Block();
         Dodge();
+        OnDrawGizmos();
     }
 
     void Move()
@@ -57,10 +63,12 @@ public class PlayerController : MonoBehaviour
         movementVertical = Vector3.Normalize(new Vector3(this.transform.position.x - Camera.transform.position.x, 0, this.transform.position.z - Camera.transform.position.z)) * vertical;
 
         Vector3 arrangedTransformPosition = new Vector3(this.transform.position.x, 0, this.transform.position.z);
-        Vector3 arrangedCameraPostion = new Vector3(Camera.transform.position.x, 0, Camera.transform.position.z);
+        Vector3 arrangedCameraPosition = new Vector3(Camera.transform.position.x, 0, Camera.transform.position.z);
 
-        movementHorizontal = Vector3.Normalize(Vector3.Cross(arrangedCameraPostion - arrangedTransformPosition, this.transform.position - arrangedTransformPosition )) * horizontal;
+        movementHorizontal = Vector3.Normalize(Vector3.Cross(arrangedCameraPosition - arrangedTransformPosition, this.transform.position - arrangedTransformPosition )) * horizontal;
 
+        bool isOnSlope = IsOnSlope();
+        
         movement = movementVertical + movementHorizontal;
 
         if (isJumping)
@@ -72,6 +80,17 @@ public class PlayerController : MonoBehaviour
         {
             moveSpeed = 5f;
             turnSpeed = 50f;
+        }
+
+        if (isGrounded && isOnSlope)
+        {
+            movement = SlopeDirection(movement);
+            rb.useGravity = false;
+        }
+        else
+        {
+            movement = movementVertical + movementHorizontal;
+            rb.useGravity = true;
         }
         
         transform.position += movement * moveSpeed * Time.deltaTime;
@@ -96,20 +115,46 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    // 경사로 판단 함수
+    bool IsOnSlope()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out slopeHit, groundCheckDistance, Ground))
+        {
+            var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle != 0f && angle < maxSlopeAngle;
+        }
+        return false;
+    }
+
+    protected Vector3 SlopeDirection(Vector3 direction)
+    {
+        Vector3 slopeDirection = Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
+        return slopeDirection;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.25f, 0.2f, transform.lossyScale.z - 0.25f);
+        Gizmos.DrawWireCube(groundCheck.position, boxSize);
+    }
+
     void GroundCheck()
     {
-        // 플레이어의 위치에서, 아래방향으로, groundCheckDistance 만큼 ray를 쏴서, Ground 레이어가 있는지 검사
-        if (Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, Ground))
+        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.25f, 0.2f, transform.lossyScale.z - 0.25f);
+        
+        if(Physics.CheckBox(groundCheck.position, boxSize, Quaternion.identity, Ground))
         {
-            if(isJumping)
+            if (isJumping)
             {
-                isJumping = false;
+                isGrounded = false;
             }
             isGrounded = true;
         }
         else
         {
-            isGrounded = false;
+            isGrounded = true;
         }
     }
     
@@ -151,16 +196,17 @@ public class PlayerController : MonoBehaviour
     
     void Dodge()
     {
+        // bool isGrounded = IsGrounded();
         if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
         {
             isDodging = true;
             anim.SetTrigger("Dodging");
             rb.AddForce(transform.forward * dodgeForce, ForceMode.VelocityChange);
-            StartCoroutine(isPlayerDodge());
+            StartCoroutine(IsPlayerDodge());
         }
     }
     
-    IEnumerator isPlayerDodge()
+    IEnumerator IsPlayerDodge()
     {
         yield return new WaitForSeconds(0.9f);
         isDodging = false;
