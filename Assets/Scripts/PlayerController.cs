@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private float moveSpeed;
     private float turnSpeed;
-    private float dodgeForce;
+    public float dodgeForce;
 
     [SerializeField]
     private bool isGrounded;
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         Jump();
         Block();
         Dodge();
-        OnDrawGizmos();
     }
 
     void Move()
@@ -136,13 +135,13 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.25f, 0.2f, transform.lossyScale.z - 0.25f);
+        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.4f, 0.1f, transform.lossyScale.z - 0.4f);
         Gizmos.DrawWireCube(groundCheck.position, boxSize);
     }
 
     void GroundCheck()
     {
-        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.25f, 0.2f, transform.lossyScale.z - 0.25f);
+        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.4f, 0.1f, transform.lossyScale.z - 0.4f);
         
         if(Physics.CheckBox(groundCheck.position, boxSize, Quaternion.identity, Ground))
         {
@@ -154,7 +153,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            isGrounded = true;
+            isGrounded = false;
         }
     }
     
@@ -196,12 +195,12 @@ public class PlayerController : MonoBehaviour
     
     void Dodge()
     {
-        // bool isGrounded = IsGrounded();
         if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
         {
             isDodging = true;
+            rb.drag = 10;
             anim.SetTrigger("Dodging");
-            rb.AddForce(transform.forward * dodgeForce, ForceMode.VelocityChange);
+            rb.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
             StartCoroutine(IsPlayerDodge());
         }
     }
