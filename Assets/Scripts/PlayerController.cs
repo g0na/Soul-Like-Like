@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private float moveSpeed;
     private float turnSpeed;
+
     public float dodgeForce;
 
     [SerializeField]
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && isOnSlope)
         {
             movement = SlopeDirection(movement);
-            rb.useGravity = false;
+            //rb.useGravity = false;
         }
         else
         {
@@ -195,6 +196,10 @@ public class PlayerController : MonoBehaviour
     
     void Dodge()
     {
+        if (isDodging)
+        {
+            rb.AddForce(transform.forward * 0.5f, ForceMode.Impulse);
+        }
         if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
         {
             isDodging = true;
