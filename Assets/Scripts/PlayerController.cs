@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private RaycastHit slopeHit;
     public float groundCheckDistance;
+    public Transform raycastOrigin;
     public float maxSlopeAngle = 60f;
     public float jumpForce;
     public LayerMask Ground;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+        bool isOnSlope = IsOnSlope();
 
         movementVertical = Vector3.Normalize(new Vector3(this.transform.position.x - Camera.transform.position.x, 0, this.transform.position.z - Camera.transform.position.z)) * vertical;
 
@@ -67,9 +69,16 @@ public class PlayerController : MonoBehaviour
 
         movementHorizontal = Vector3.Normalize(Vector3.Cross(arrangedCameraPosition - arrangedTransformPosition, this.transform.position - arrangedTransformPosition )) * horizontal;
 
-        bool isOnSlope = IsOnSlope();
+        if (CheckNextFrameAngle(moveSpeed) < maxSlopeAngle)
+        {
+            movement = movementVertical + movementHorizontal;
+        }
+        else
+        {
+            movement = Vector3.zero;
+        }
         
-        movement = movementVertical + movementHorizontal;
+       
 
         if (isJumping)
         {
@@ -85,7 +94,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && isOnSlope)
         {
             movement = SlopeDirection(movement);
-            //rb.useGravity = false;
+            rb.useGravity = false;
         }
         else
         {
@@ -110,7 +119,11 @@ public class PlayerController : MonoBehaviour
         // 회전
         if (movement != Vector3.zero) // 키 입력값이 존재할 때
         {
-            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up); // 해당 방향을 바라봄
+            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up); // 이동 방향을 바라보도록 설정
+            Vector3 eulerRotation = toRotation.eulerAngles;
+            eulerRotation.x = 0f; // X축 회전 제거
+            eulerRotation.z = 0f; // Z축 회전 제거
+            toRotation = Quaternion.Euler(eulerRotation); // 수정된 회전 값 적용
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime); // 부드러운 회전
         }
     }
@@ -156,6 +169,19 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    private float CheckNextFrameAngle(float moveSpeed)
+    {
+        // 캐릭터의 다음 프레임 위치
+        var nextFramePosition = raycastOrigin.position + movement * moveSpeed * Time.deltaTime;
+
+        if (Physics.Raycast(nextFramePosition, Vector3.down, out RaycastHit hitInfo, groundCheckDistance, Ground))
+        {
+            return Vector3.Angle(Vector3.up, hitInfo.normal);
+        }
+
+        return 0f;
     }
     
     void Jump()
