@@ -23,4 +23,10 @@ public class Border : MonoBehaviour
             Debug.Log("ENTER!!");
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        // Gizmos.DrawCube(this.transform.position, this.transform.lossyScale);
+    }
 }
