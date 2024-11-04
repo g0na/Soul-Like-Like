@@ -159,10 +159,6 @@ public class PlayerController : MonoBehaviour
         
         if(Physics.CheckBox(groundCheck.position, boxSize, Quaternion.identity, Ground))
         {
-            if (isJumping)
-            {
-                isGrounded = false;
-            }
             isGrounded = true;
         }
         else
@@ -190,10 +186,19 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. From: Unity Script
             isJumping = true;
+            isGrounded = false;
             anim.SetTrigger("Jumping");            
         }
     }
-
+    
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isJumping = false;
+            isGrounded = true;
+        }
+    }
     
     void Block()
     {
