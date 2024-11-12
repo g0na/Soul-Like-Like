@@ -17,8 +17,10 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     [SerializeField]
     private bool isDodging;
+    public bool isAttacking;
     [SerializeField] 
     public Transform groundCheck;
+    
 
     private RaycastHit slopeHit;
     public float groundCheckDistance;
@@ -30,6 +32,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 movement;
     private Vector3 movementVertical;
     private Vector3 movementHorizontal;
+
+    public Sword sword;
+    private float attackDelay;
+    private bool isAttackReady;
     
     Rigidbody rb;
     Animator anim;
@@ -51,6 +57,7 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+        Attack();
         Jump();
         Block();
         Dodge();
@@ -80,7 +87,7 @@ public class PlayerController : MonoBehaviour
         
        
 
-        if (isJumping)
+        if (isJumping || isAttacking)
         {
             moveSpeed = 1f;
             turnSpeed = 2.5f;
@@ -245,6 +252,22 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.9f);
         isDodging = false;
+    }
+
+    void Attack()
+    {
+        if (sword == null)
+            return;
+        
+        attackDelay += Time.deltaTime;
+        isAttackReady = sword.attackSpeed < attackDelay;
+        
+        if (Input.GetMouseButtonDown(0) && isGrounded && isAttackReady && !isDodging)
+        {
+            sword.Use();
+            anim.SetTrigger("Attacking");
+            attackDelay = 0;
+        }
     }
     
 }
