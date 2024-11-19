@@ -234,14 +234,14 @@ public class PlayerController : MonoBehaviour
     
     void Dodge()
     {
-        if (isDodging)
-        {
-            rb.AddForce(transform.forward * 0.5f, ForceMode.Impulse);
-        }
+        // if (isDodging)
+        // {
+        //     rb.AddForce(transform.forward * 0.5f, ForceMode.Impulse);
+        // }
         if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
         {
             isDodging = true;
-            rb.drag = 10;
+            rb.drag = 3;
             anim.SetTrigger("Dodging");
             rb.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
             StartCoroutine(IsPlayerDodge());
@@ -250,7 +250,8 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator IsPlayerDodge()
     {
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(0.95f);
+        rb.drag = 0;
         isDodging = false;
     }
 

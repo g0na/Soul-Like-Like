@@ -1239,12 +1239,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90e97d08a325fe4da0b0c02a42fe7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dodgeForce: 0
+  dodgeForce: 15
   isGrounded: 0
   isJumping: 0
   isDodging: 0
-  groundCheck: {fileID: 1159468353}
   isAttacking: 0
+  groundCheck: {fileID: 1159468353}
   groundCheckDistance: 0.5
   raycastOrigin: {fileID: 1166777184}
   maxSlopeAngle: 60
