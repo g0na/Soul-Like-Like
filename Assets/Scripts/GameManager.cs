@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
 
     public GameObject player;
+    string currentRegion;
 
     void Awake()
     {
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        currentRegion = "plane";
     }
 
     // Update is called once per frame

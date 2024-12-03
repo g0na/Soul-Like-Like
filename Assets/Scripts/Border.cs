@@ -17,11 +17,14 @@ public class Border : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("!!!!");
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("ENTER!!");
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        
     }
 
     private void OnDrawGizmos()
