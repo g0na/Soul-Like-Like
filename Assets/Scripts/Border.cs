@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class Border : MonoBehaviour
 {
+
+    public GameObject[] borderPart = new GameObject[2];
+
+    private bool isBorder = false;
+    private int borderCount = 0;
+    private string lastExitBorderName;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
     // Update is called once per frame
     void Update()
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+
+    public void ContactPlayer()
     {
-        if (other.gameObject.CompareTag("Player"))
+        borderCount++;
+
+        if(borderCount == 2)
         {
-            Debug.Log("ENTER!!");
+            isBorder = true;
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        
-    }
 
-    private void OnDrawGizmos()
+    public void UntactPlayer(string regionName)
     {
-        Gizmos.color = Color.white;
-        // Gizmos.DrawCube(this.transform.position, this.transform.lossyScale);
+        borderCount--;
+        lastExitBorderName = regionName;
+        if (borderCount == 0)
+        {
+            GameManager.Instance.ChangeRegion(lastExitBorderName);
+            isBorder = false;
+        }        
     }
 }

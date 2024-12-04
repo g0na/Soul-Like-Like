@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 355308999}
   - component: {fileID: 355309000}
   m_Layer: 0
-  m_Name: Border
+  m_Name: OuterBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,9 +490,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 355308994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 749bd8a61a751854899dfcd4d7d71ed0, type: 3}
+  m_Script: {fileID: 11500000, guid: cd1ce0a1697bcb342890ec3d912667d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  regionBorderName: Plain
 --- !u!4 &360746970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 583794485, guid: 31a06acdb2cf9064a94ee7f80a878815, type: 3}
@@ -847,9 +848,9 @@ GameObject:
   - component: {fileID: 1018771619}
   - component: {fileID: 1018771618}
   - component: {fileID: 1018771617}
-  - component: {fileID: 1018771616}
+  - component: {fileID: 1018771620}
   m_Layer: 0
-  m_Name: Border (1)
+  m_Name: InnerBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -870,18 +871,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2142313258}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1018771616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018771614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 749bd8a61a751854899dfcd4d7d71ed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1018771617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -952,6 +941,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018771614}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1018771620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018771614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd1ce0a1697bcb342890ec3d912667d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regionBorderName: TreeSide
 --- !u!1 &1159468352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,6 +1450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1609699691}
+  currentRegion: 
 --- !u!1001 &1941970170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1552,8 +1555,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142313258}
+  - component: {fileID: 2142313259}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1576,6 +1580,21 @@ Transform:
   - {fileID: 1018771615}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2142313259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142313257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749bd8a61a751854899dfcd4d7d71ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  borderPart:
+  - {fileID: 355308994}
+  - {fileID: 1018771614}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

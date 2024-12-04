@@ -8,16 +8,25 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
 
     public GameObject player;
-    string currentRegion;
+    [SerializeField]
+    private string currentRegion;
 
     void Awake()
     {
+        if(null == instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
 
     }
 
     void Start()
     {
-        currentRegion = "plane";
+        currentRegion = "plain";
     }
 
     // Update is called once per frame
@@ -36,5 +45,9 @@ public class GameManager : MonoBehaviour
             }
             return instance;
         }
+    }
+    public void ChangeRegion(string regionName)
+    {
+        currentRegion = regionName;
     }
 }
