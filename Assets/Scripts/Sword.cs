@@ -26,7 +26,7 @@ public class Sword : MonoBehaviour
         _playerController.isAttacking = true;
         
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         attackArea.enabled = false;
         _playerController.isAttacking = false;
     }

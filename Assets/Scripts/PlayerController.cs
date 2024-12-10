@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        if (isAttacking)
+        {
+            return;
+        }
+        
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         bool isOnSlope = IsOnSlope();
@@ -84,10 +89,15 @@ public class PlayerController : MonoBehaviour
         {
             movement = Vector3.zero;
         }
-        
-       
 
-        if (isJumping || isAttacking)
+
+        if (isAttacking)
+        {
+            moveSpeed = 0f;
+            turnSpeed = 0f;
+        }
+
+        if (isJumping)
         {
             moveSpeed = 1f;
             turnSpeed = 2.5f;
@@ -189,7 +199,7 @@ public class PlayerController : MonoBehaviour
     
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.F) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.F) && isGrounded && !isDodging)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. From: Unity Script
             isJumping = true;
@@ -234,26 +244,65 @@ public class PlayerController : MonoBehaviour
     
     void Dodge()
     {
-        // if (isDodging)
-        // {
-        //     rb.AddForce(transform.forward * 0.5f, ForceMode.Impulse);
-        // }
         if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
         {
             isDodging = true;
-            rb.drag = 3;
             anim.SetTrigger("Dodging");
-            rb.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
+
+            // 경사로 방향을 고려한 구르기 방향 설정
+            Vector3 dodgeDirection = IsOnSlope() ? SlopeDirection(transform.forward) : transform.forward;
+            rb.velocity = Vector3.zero;
+            rb.AddForce(dodgeDirection * dodgeForce, ForceMode.VelocityChange);
+
             StartCoroutine(IsPlayerDodge());
         }
     }
-    
+
     IEnumerator IsPlayerDodge()
     {
-        yield return new WaitForSeconds(0.95f);
-        rb.drag = 0;
+        float dodgeTime = 0.75f;
+        float groundStayForce = 0.8f; // 경사로 쪽 힘
+
+        for (float t = 0; t < dodgeTime; t += Time.deltaTime)
+        {
+            if (IsOnSlope())
+            {
+                // 경사로 위에서 지면을 유지하도록 추가 힘 적용
+                rb.AddForce(-slopeHit.normal * groundStayForce, ForceMode.Acceleration);
+            }
+
+            yield return null;
+        }
+
+       
+        rb.drag = 10f;
+        yield return new WaitForSeconds(0.1f);
+        rb.velocity = Vector3.zero;
+        rb.drag = 0f;
+        
+        
         isDodging = false;
     }
+    
+    // void Dodge()
+    // {
+    //     if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
+    //     {
+    //         isDodging = true;
+    //         anim.SetTrigger("Dodging");
+    //         rb.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
+    //         rb.drag = 3;
+    //         StartCoroutine(IsPlayerDodge());
+    //     }
+    // }
+    //
+    // IEnumerator IsPlayerDodge()
+    // {
+    //     yield return new WaitForSeconds(0.3f);
+    //     rb.drag = 0;
+    //     yield return new WaitForSeconds(0.65f);
+    //     isDodging = false;
+    // }
 
     void Attack()
     {
