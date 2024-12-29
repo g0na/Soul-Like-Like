@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -517,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  enemyCognitionRange: {fileID: 0}
 --- !u!136 &374137250
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -540,6 +541,54 @@ CapsuleCollider:
   m_Height: 2.4187775
   m_Direction: 1
   m_Center: {x: 0, y: 0.70938873, z: 0}
+--- !u!135 &374137251
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374137247}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 4
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &374137253
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374137247}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1594,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -7949136978043226412, guid: e8ddee60838d7e84b9bcb31f3e99e019, type: 3}
       insertIndex: -1
       addedObject: {fileID: 374137250}
+    - targetCorrespondingSourceObject: {fileID: -7949136978043226412, guid: e8ddee60838d7e84b9bcb31f3e99e019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 374137251}
+    - targetCorrespondingSourceObject: {fileID: -7949136978043226412, guid: e8ddee60838d7e84b9bcb31f3e99e019, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 374137253}
   m_SourcePrefab: {fileID: 9199261849990390558, guid: e8ddee60838d7e84b9bcb31f3e99e019, type: 3}
 --- !u!1 &2142313257
 GameObject:
