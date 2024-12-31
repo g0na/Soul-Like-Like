@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     [SerializeField]
-    private string currentRegion;
+    public string currentRegion;
 
     void Awake()
     {
