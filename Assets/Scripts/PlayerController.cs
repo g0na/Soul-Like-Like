@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isDodging;
     public bool isAttacking;
+    public bool isFalling = false;
     [SerializeField] 
     public Transform groundCheck;
-    
 
     private RaycastHit slopeHit;
     public float groundCheckDistance;
@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
         }
         Attack();
         Jump();
+        Fall();
         Block();
         Dodge();
     }
@@ -207,6 +208,20 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Jumping");            
         }
     }
+
+    void Fall()
+    {
+        if (!isJumping && !isGrounded && !isDodging)
+        {
+            isFalling = true;
+            anim.SetBool("Falling", true);
+        }
+        else
+        {
+            isFalling = false;
+            anim.SetBool("Falling", false);
+        }
+    }
     
     void OnCollisionEnter(Collision other)
     {
@@ -284,26 +299,7 @@ public class PlayerController : MonoBehaviour
         isDodging = false;
     }
     
-    // void Dodge()
-    // {
-    //     if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
-    //     {
-    //         isDodging = true;
-    //         anim.SetTrigger("Dodging");
-    //         rb.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
-    //         rb.drag = 3;
-    //         StartCoroutine(IsPlayerDodge());
-    //     }
-    // }
-    //
-    // IEnumerator IsPlayerDodge()
-    // {
-    //     yield return new WaitForSeconds(0.3f);
-    //     rb.drag = 0;
-    //     yield return new WaitForSeconds(0.65f);
-    //     isDodging = false;
-    // }
-
+    
     void Attack()
     {
         if (sword == null)
