@@ -37,7 +37,7 @@ public class Sword : MonoBehaviour
             _enemy = other.GetComponent<Enemy>();
             if (_enemy != null)
             {
-                _enemy.hp -= damage;
+                _enemy.Hit(damage);
             }
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int hp;
+    private bool isInvincible = false;
 
     public SphereCollider enemyCognitionRange;
 
@@ -16,6 +17,19 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Debug.Log("!");
+    }
+
+    public void Hit(int dmg)
+    {
         Debug.Log("!");
+        
+
+        this.hp -= dmg;
+        UIManager.Instance.ShowDamageText(dmg);
+        if (hp < 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
