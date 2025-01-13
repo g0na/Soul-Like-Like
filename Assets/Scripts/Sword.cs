@@ -5,7 +5,6 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     public int damage;
-    public float attackSpeed;
     public BoxCollider attackArea;
 
     private PlayerController _playerController;

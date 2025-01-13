@@ -34,11 +34,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 movementHorizontal;
 
     public Sword sword;
-    private float attackDelay;
-    private bool isAttackReady;
     
     Rigidbody rb;
     Animator anim;
+    Attack _attack;
 
     public GameObject Camera;
     
@@ -47,6 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        _attack = GetComponent<Attack>();
     }
 
     // Update is called once per frame
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
-        Attack();
+        MainAttack();
         Jump();
         Block();
         Dodge();
@@ -283,41 +283,19 @@ public class PlayerController : MonoBehaviour
         
         isDodging = false;
     }
-    
-    // void Dodge()
-    // {
-    //     if (Input.GetButtonDown("Dodge") && isGrounded && !isDodging)
-    //     {
-    //         isDodging = true;
-    //         anim.SetTrigger("Dodging");
-    //         rb.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
-    //         rb.drag = 3;
-    //         StartCoroutine(IsPlayerDodge());
-    //     }
-    // }
-    //
-    // IEnumerator IsPlayerDodge()
-    // {
-    //     yield return new WaitForSeconds(0.3f);
-    //     rb.drag = 0;
-    //     yield return new WaitForSeconds(0.65f);
-    //     isDodging = false;
-    // }
 
-    void Attack()
+    void MainAttack()
     {
         if (sword == null)
             return;
         
-        attackDelay += Time.deltaTime;
-        isAttackReady = sword.attackSpeed < attackDelay;
-        
-        if (Input.GetMouseButtonDown(0) && isGrounded && isAttackReady && !isDodging)
+        if (Input.GetMouseButtonDown(0) && isGrounded && !isDodging)
         {
             sword.Use();
-            anim.SetTrigger("Attacking");
-            attackDelay = 0;
+            anim.SetTrigger("Attack");
+            _attack.AttackCount = 0;
         }
     }
+    
     
 }
