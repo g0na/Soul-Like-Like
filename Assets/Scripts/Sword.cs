@@ -22,12 +22,10 @@ public class Sword : MonoBehaviour
         
         yield return new WaitForSeconds(0.1f);
         attackArea.enabled = true;
-        _playerController.isAttacking = true;
         
 
         yield return new WaitForSeconds(0.8f);
         attackArea.enabled = false;
-        _playerController.isAttacking = false;
     }
 
     private void OnTriggerEnter(Collider other)

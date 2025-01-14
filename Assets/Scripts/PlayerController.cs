@@ -90,13 +90,6 @@ public class PlayerController : MonoBehaviour
             movement = Vector3.zero;
         }
 
-
-        if (isAttacking)
-        {
-            moveSpeed = 0f;
-            turnSpeed = 0f;
-        }
-
         if (isJumping)
         {
             moveSpeed = 1f;
@@ -207,6 +200,11 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Jumping");            
         }
     }
+
+    void Fall()
+    {
+        // anim.Set
+    }
     
     void OnCollisionEnter(Collision other)
     {
@@ -295,6 +293,24 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Attack");
             _attack.AttackCount = 0;
         }
+    }
+
+    void StartAttack()
+    {
+        isAttacking = true;
+        moveSpeed = 0f;
+        turnSpeed = 0f;
+
+        sword.attackArea.enabled = true;
+    }
+
+    void StopAttack()
+    {
+        isAttacking = false;
+        moveSpeed = 5f;
+        turnSpeed = 50f;
+        
+        sword.attackArea.enabled = false;
     }
     
     
