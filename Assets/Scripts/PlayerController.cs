@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Block();
         Dodge();
+        Fall();
     }
 
     void Move()
@@ -159,7 +160,7 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.4f, 0.1f, transform.lossyScale.z - 0.4f);
+        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.4f, 0.2f, transform.lossyScale.z - 0.4f);
         Gizmos.DrawWireCube(groundCheck.position, boxSize);
     }
 
@@ -203,8 +204,17 @@ public class PlayerController : MonoBehaviour
 
     void Fall()
     {
+        if (!isGrounded && !isJumping)
+        {
+            anim.SetTrigger("Falling");
+        }
+    }
+
+    void JumpFall()
+    {
         anim.SetTrigger("Falling");
     }
+    
     
     void OnCollisionEnter(Collision other)
     {
@@ -271,13 +281,11 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
-
-       
+        
         rb.drag = 10f;
         yield return new WaitForSeconds(0.1f);
         rb.velocity = Vector3.zero;
         rb.drag = 0f;
-        
         
         isDodging = false;
     }
