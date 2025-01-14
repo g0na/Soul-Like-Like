@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour
 
     void Fall()
     {
-        // anim.Set
+        anim.SetTrigger("Falling");
     }
     
     void OnCollisionEnter(Collision other)
