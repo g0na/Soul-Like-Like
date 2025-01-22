@@ -49,5 +49,6 @@ public class GameManager : MonoBehaviour
     public void ChangeRegion(string regionName)
     {
         currentRegion = regionName;
+        UIManager.Instance.ChangeRegionName();
     }
 }

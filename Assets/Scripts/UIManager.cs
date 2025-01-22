@@ -50,6 +50,23 @@ public class UIManager : MonoBehaviour
     public void ChangeRegionName()
     {
         currentRegionText.text = GameManager.Instance.currentRegion;
+        StartCoroutine(ShowRegionName());
+
+    }
+
+    IEnumerator ShowRegionName()
+    {
+        int transp = 0;
+        while (true)
+        {
+            if (transp == 100)
+            {
+                break;
+            }
+            Debug.Log(transp);
+            transp += 1;
+        }        
+        yield return null;
     }
 
     public void ShowDamageText(int dmg)
