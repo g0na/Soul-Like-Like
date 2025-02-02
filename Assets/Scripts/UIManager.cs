@@ -5,10 +5,9 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     private static UIManager instance = null;
-
     public TMPro.TextMeshProUGUI currentRegionText;
 
-    // Start is called before the first frame update
+    private bool isShowingRegionText = false;
 
     void Awake()
     {
@@ -20,7 +19,6 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 
     void Start()
@@ -28,7 +26,6 @@ public class UIManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -49,24 +46,34 @@ public class UIManager : MonoBehaviour
 
     public void ChangeRegionName()
     {
-        currentRegionText.text = GameManager.Instance.currentRegion;
-        StartCoroutine(ShowRegionName());
-
+        if (!isShowingRegionText)
+        {
+            isShowingRegionText = true;
+            StartCoroutine(ShowRegionName());
+        }
     }
 
     IEnumerator ShowRegionName()
     {
-        int transp = 0;
+        float transp = 0f;
+        currentRegionText.text = GameManager.Instance.currentRegion;
+        currentRegionText.color = new Color(1f, 1f, 1f, transp);
         while (true)
         {
-            if (transp == 100)
+            if(transp >= 1f)
             {
+                Debug.Log("end");
+                isShowingRegionText = false;
                 break;
             }
+            yield return new WaitForSeconds(0.01f);
+            transp += 0.01f;
+            currentRegionText.color = new Color(1f, 1f, 1f, transp);
             Debug.Log(transp);
-            transp += 1;
-        }        
+
+        }
         yield return null;
+
     }
 
     public void ShowDamageText(int dmg)
