@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     private static UIManager instance = null;
     public TMPro.TextMeshProUGUI currentRegionText;
+    public Slider hpBar;
 
     private bool isShowingRegionText = false;
 
@@ -30,6 +32,13 @@ public class UIManager : MonoBehaviour
     {
         
     }
+
+    public void ChangeHealth()
+    {
+        
+        hpBar.value = GameManager.Instance.player.GetComponent<PlayerController>().currentHp / GameManager.Instance.player.GetComponent<PlayerController>().maxHp;
+    }
+
 
     public static UIManager Instance
     {

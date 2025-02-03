@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     Attack _attack;
 
     public GameObject Camera;
+    public int maxHp;
+    public int currentHp;
     
     // Start is called before the first frame update
     void Start()
