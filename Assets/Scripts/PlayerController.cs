@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private RaycastHit slopeHit;
     public float groundCheckDistance;
     public Transform raycastOrigin;
-    public float maxSlopeAngle = 60f;
+    public float maxSlopeAngle;
     public float jumpForce;
     public LayerMask Ground;
 
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && isOnSlope)
         {
             movement = SlopeDirection(movement);
-            rb.useGravity = false;
+            // rb.useGravity = false;
         }
         else
         {
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.4f, 0.2f, transform.lossyScale.z - 0.4f);
+        Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.4f, 0.1f, transform.lossyScale.z - 0.4f);
         Gizmos.DrawWireCube(groundCheck.position, boxSize);
     }
 
@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
         if(Physics.CheckBox(groundCheck.position, boxSize, Quaternion.identity, Ground))
         {
             isGrounded = true;
+            anim.SetBool("Falling", false);
         }
         else
         {
@@ -195,7 +196,7 @@ public class PlayerController : MonoBehaviour
     
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.F) && isGrounded && !isDodging)
+        if (Input.GetKeyDown(KeyCode.F) && isGrounded && !isDodging && !isAttacking)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. From: Unity Script
             isJumping = true;
@@ -207,6 +208,16 @@ public class PlayerController : MonoBehaviour
     void Fall()
     {
         if (!isGrounded && !isJumping)
+        {
+            // anim.SetTrigger("Falling");
+            StartCoroutine(DelayedFallAnimation());
+        }
+    }
+    
+    IEnumerator DelayedFallAnimation()
+    {
+        yield return new WaitForSeconds(0.25f); // 1초 대기
+        if (!isGrounded) // 여전히 지면에 닿아있지 않은 경우에만 실행
         {
             anim.SetTrigger("Falling");
         }
@@ -304,7 +315,7 @@ public class PlayerController : MonoBehaviour
             _attack.AttackCount = 0;
         }
     }
-
+    
     void StartAttack()
     {
         isAttacking = true;
@@ -322,6 +333,4 @@ public class PlayerController : MonoBehaviour
         
         sword.attackArea.enabled = false;
     }
-    
-    
 }
