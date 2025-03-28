@@ -21,14 +21,10 @@ public class CameraController : MonoBehaviour
 
     public GameObject playerPosition;
 
-
-
     void Start()
     {
         InitCamera();
-    }
-
-    
+    }    
     void Update()
     {
         CameraMove();
@@ -36,7 +32,7 @@ public class CameraController : MonoBehaviour
     }
     private void InitCamera()
     {
-        transform.position = playerPosition.transform.position + new Vector3(0, 2f, -2f);
+        transform.position = playerPosition.transform.position + new Vector3(0, 1.2f, -2f);
     }
     private void CameraFollow()
     {
