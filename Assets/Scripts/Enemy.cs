@@ -12,18 +12,21 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        // Debug.Log("!");
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player Detected");
+            // TODO: Attack Player
+        }
     }
 
     public void Hit(int dmg)
     {
-        Debug.Log("!");
-        
+
 
         this.hp -= dmg;
         UIManager.Instance.ShowDamageText(dmg);
