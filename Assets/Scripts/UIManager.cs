@@ -34,8 +34,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void ChangeHealth()
-    {
-        
+    {        
         hpBar.value = GameManager.Instance.player.GetComponent<PlayerController>().currentHp / GameManager.Instance.player.GetComponent<PlayerController>().maxHp;
     }
 
@@ -71,19 +70,34 @@ public class UIManager : MonoBehaviour
         {
             if(transp >= 1f)
             {
-                Debug.Log("end");
+                StartCoroutine(FadeOutRegionName());
+                break;
+            }
+            yield return new WaitForSeconds(0.01f);
+            transp += Time.deltaTime;
+            currentRegionText.color = new Color(1f, 1f, 1f, transp);
+
+        }
+        yield return null;
+    }
+
+    IEnumerator FadeOutRegionName()
+    {
+        float transp = 1f;
+        while (true)
+        {
+            if (transp <= 0f)
+            {
                 isShowingRegionText = false;
                 break;
             }
             yield return new WaitForSeconds(0.01f);
-            transp += 0.01f;
+            transp -= Time.deltaTime;
             currentRegionText.color = new Color(1f, 1f, 1f, transp);
-            Debug.Log(transp);
-
         }
         yield return null;
-
     }
+
 
     public void ShowDamageText(int dmg)
     {
