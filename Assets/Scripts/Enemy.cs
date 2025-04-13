@@ -17,6 +17,10 @@ public class Enemy : MonoBehaviour
 
     Animator anim;
 
+    // Attack
+    float attackCheckRadius = 0.2f;
+
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -53,6 +57,16 @@ public class Enemy : MonoBehaviour
         if (isPlayerCloseEnough && distanceToPlayer <= attackRange)
         {
             anim.SetTrigger("attack");
+
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(0, 0.5f, 0.2f), attackCheckRadius);
+
+            foreach (Collider col in hitColliders)
+            {
+                if (col.CompareTag("Player"))
+                {
+                    Debug.Log("플레이어 공격");
+                }
+            }
         }
     }
 
@@ -75,5 +89,11 @@ public class Enemy : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0.5f, 0.2f), attackCheckRadius);
     }
 }

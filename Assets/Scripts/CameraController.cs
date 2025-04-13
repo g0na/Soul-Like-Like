@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
     {
         mouseY -= Input.GetAxisRaw("Mouse Y") * mouseYSensitivity * Time.deltaTime;
         mouseY = Mathf.Clamp(mouseY, -mouseYLowerLimit, mouseYUpperLimit);
-        mouseX -= Input.GetAxis("Mouse X") * mouseXSensitivity * Time.deltaTime;
+        mouseX += Input.GetAxis("Mouse X") * mouseXSensitivity * Time.deltaTime;
 
         float radius = -3.0f;
         float x = Mathf.Sin(mouseX) * radius;

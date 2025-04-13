@@ -64,7 +64,10 @@ public class PlayerController : MonoBehaviour
         Block();
         Dodge();
         Fall();
+        OutofMap();
     }
+
+
 
     void Move()
     {
@@ -332,5 +335,15 @@ public class PlayerController : MonoBehaviour
         turnSpeed = 50f;
         
         sword.attackArea.enabled = false;
+    }
+
+    private void OutofMap()
+    {
+        if (this.transform.position.y < -12f)
+        {
+            this.transform.position = new Vector3(0, 1, 0);
+            currentHp = 0;
+            UIManager.Instance.ChangeHealth();
+        }
     }
 }
