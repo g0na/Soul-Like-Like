@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
             {
                 if (col.CompareTag("Player"))
                 {
-                    Debug.Log("ÇÃ·¹ÀÌ¾î °ø°İ");
+                    Debug.Log("í”Œë ˆì´ì–´ ê³µê²©");
                 }
             }
         }

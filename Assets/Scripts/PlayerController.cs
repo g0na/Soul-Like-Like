@@ -67,8 +67,6 @@ public class PlayerController : MonoBehaviour
         OutofMap();
     }
 
-
-
     void Move()
     {
         if (isAttacking)
@@ -231,13 +229,18 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Falling");
     }
     
-    
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isJumping = false;
             isGrounded = true;
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            currentHp -= 10;
+            anim.SetTrigger("Hit_Front");
+            
         }
     }
     
