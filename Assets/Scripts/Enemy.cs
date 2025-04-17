@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class Enemy : MonoBehaviour
     float attackRange = 1.1f;
     public float distanceToPlayer;
 
+    private bool isDead = false;
+
     Animator anim;
 
     // Attack
@@ -29,7 +32,10 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         Attack();
+        CheckDeath();
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -85,15 +91,20 @@ public class Enemy : MonoBehaviour
     {
         this.hp -= dmg;
         UIManager.Instance.ShowDamageText(dmg);
-        if (hp < 0)
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0.5f, 0.2f), attackCheckRadius);
+    }
+
+    private void CheckDeath()
+    {
+        if (hp <= 0)
+        {
+            anim.SetTrigger("isDead");
+            Destroy(this.gameObject, 2f);
+        }
     }
 }
