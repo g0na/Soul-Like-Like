@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 movementHorizontal;
 
     public Sword sword;
+    private Enemy _enemy;
     
     Rigidbody rb;
     Animator anim;
@@ -54,6 +55,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentHp <= 0)
+        {
+            Destroy(gameObject, 1.0f);
+        }
         GroundCheck();
         if (!isDodging)
         {
@@ -236,14 +241,35 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             isGrounded = true;
         }
+
         if (other.gameObject.CompareTag("Enemy"))
         {
-            currentHp -= 10;
-            anim.SetTrigger("Hit_Front");
-            
+            _enemy = other.gameObject.GetComponent<Enemy>();
+
+            if (_enemy != null)
+            {
+                // 적에서 플레이어로의 방향 벡터 계산
+                Vector3 enemyToPlayer = other.transform.position - transform.position;
+
+                // 적의 전방 벡터와 플레이어 방향 벡터 사이의 내적 계산
+                float dotProduct = Vector3.Dot(other.transform.forward, enemyToPlayer.normalized);
+
+                currentHp -= 10;
+
+                // 내적이 양수면 플레이어는 적의 앞쪽에 있음
+                if (dotProduct > 0)
+                {
+                    anim.SetTrigger("Hit_Front");
+                }
+                // 내적이 음수면 플레이어는 적의 뒤쪽에 있음
+                else
+                {
+                    anim.SetTrigger("Hit_Back");
+                }
+            }
         }
     }
-    
+
     void Block()
     {
         if (Input.GetMouseButton(1) && movement == Vector3.zero) // 정지 상태에서 오른쪽 마우스 버튼을 누를 때
