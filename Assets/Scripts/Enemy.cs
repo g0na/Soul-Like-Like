@@ -18,10 +18,15 @@ public class Enemy : MonoBehaviour
 
     private bool isDead = false;
 
+    // [HideInInspector]
+    public bool isParriable = false;
+
     Animator anim;
 
     // Attack
-    float attackCheckRadius = 0.2f;
+    float attackCheckRadius = 0.4f;
+    [SerializeField] private float forwardOffset = 0.4f;
+    [SerializeField] private float verticalOffset = 1.0f;
 
 
     private void Start()
@@ -62,9 +67,11 @@ public class Enemy : MonoBehaviour
     {
         if (isPlayerCloseEnough && distanceToPlayer <= attackRange)
         {
+            StartCoroutine(OpenParryWindow());
             anim.SetTrigger("attack");
 
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position + new Vector3(0, 0.5f, 0.2f), attackCheckRadius);
+            Vector3 attackOrigin = transform.position + transform.forward * forwardOffset + Vector3.up * verticalOffset;
+            Collider[] hitColliders = Physics.OverlapSphere(attackOrigin, attackCheckRadius);
 
             foreach (Collider col in hitColliders)
             {
@@ -73,6 +80,20 @@ public class Enemy : MonoBehaviour
                     Debug.Log("플레이어 공격");
                 }
             }
+        }
+    }
+
+    IEnumerator OpenParryWindow()
+    {
+        if (isParriable)
+        {
+            
+        }
+        else
+        {
+            isParriable = true;
+            yield return new WaitForSeconds(0.2f);
+            isParriable = false;
         }
     }
 
@@ -96,7 +117,8 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0.5f, 0.2f), attackCheckRadius);
+        Vector3 attackOrigin = transform.position + transform.forward * forwardOffset + Vector3.up * verticalOffset;
+        Gizmos.DrawWireSphere(attackOrigin, attackCheckRadius);
     }
 
     private void CheckDeath()
