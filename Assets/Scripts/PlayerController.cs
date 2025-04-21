@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking;
     [SerializeField] 
     public Transform groundCheck;
-    
 
+    private GameObject lastRaycastHitEnemy = null;
     private RaycastHit slopeHit;
     public float groundCheckDistance;
     public Transform raycastOrigin;
@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         Dodge();
         Fall();
         OutofMap();
+        ShootRaycast();
     }
 
     void Move()
@@ -233,7 +234,25 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetTrigger("Falling");
     }
-    
+
+    void ShootRaycast()
+    {
+        Ray ray = new Ray(transform.position + new Vector3(0f, 0.75f, 0f), transform.forward);
+        RaycastHit hit;
+
+        Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
+
+        lastRaycastHitEnemy = null;
+
+        if (Physics.Raycast(ray, out hit, 2f))
+        {
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                lastRaycastHitEnemy = hit.transform.gameObject;
+            }
+        }
+    }
+
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -248,24 +267,20 @@ public class PlayerController : MonoBehaviour
 
             if (_enemy != null)
             {
-                // 적에서 플레이어로의 방향 벡터 계산
-                Vector3 enemyToPlayer = other.transform.position - transform.position;
-
-                // 적의 전방 벡터와 플레이어 방향 벡터 사이의 내적 계산
-                float dotProduct = Vector3.Dot(other.transform.forward, enemyToPlayer.normalized);
-
-                currentHp -= 10;
-
-                // 내적이 양수면 플레이어는 적의 앞쪽에 있음
-                if (dotProduct > 0)
+                // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
+                if (lastRaycastHitEnemy == other.gameObject)
                 {
+                    // 정면 충돌
                     anim.SetTrigger("Hit_Front");
                 }
-                // 내적이 음수면 플레이어는 적의 뒤쪽에 있음
                 else
                 {
+                    // 후면 충돌
                     anim.SetTrigger("Hit_Back");
                 }
+
+                // 데미지 적용
+                currentHp -= 10;
             }
         }
     }
