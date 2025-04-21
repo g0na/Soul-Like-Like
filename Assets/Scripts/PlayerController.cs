@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isDodging;
     public bool isAttacking;
+    private bool isAlive;
     [SerializeField] 
     public Transform groundCheck;
 
@@ -50,27 +51,38 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         _attack = GetComponent<Attack>();
+        isAlive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        GroundCheck();
+        if (isAlive)
+        {
+            if (!isDodging)
+            {
+                Move();
+            }
+            MainAttack();
+            Jump();
+            Block();
+            Dodge();
+            Fall();
+            OutofMap();
+            ShootRaycast();
+            Death();
+        }
+    }
+
+    private void Death()
+    {
         if (currentHp <= 0)
         {
-            Destroy(gameObject, 1.0f);
+            isAlive = false;
+            anim.SetTrigger("Death");
+            Destroy(gameObject, 4f);
         }
-        GroundCheck();
-        if (!isDodging)
-        {
-            Move();
-        }
-        MainAttack();
-        Jump();
-        Block();
-        Dodge();
-        Fall();
-        OutofMap();
-        ShootRaycast();
     }
 
     void Move()
