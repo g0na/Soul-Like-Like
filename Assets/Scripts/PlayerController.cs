@@ -81,7 +81,8 @@ public class PlayerController : MonoBehaviour
         {
             isAlive = false;
             anim.SetTrigger("Death");
-            Destroy(gameObject, 4f);
+            UIManager.Instance.ShowDeadPanel();
+            // Destroy(gameObject, 4f);
         }
     }
 

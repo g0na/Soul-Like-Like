@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
             {
                 if (col.CompareTag("Player"))
                 {
-                    Debug.Log("플레이어 공격");
+                    // Debug.Log("플레이어 공격");
                 }
             }
         }

@@ -51,4 +51,9 @@ public class GameManager : MonoBehaviour
         currentRegion = regionName;
         UIManager.Instance.ChangeRegionName();
     }
+
+    public void ReSpawn()
+    {
+        Debug.Log("ReSpawn");
+    }
 }
