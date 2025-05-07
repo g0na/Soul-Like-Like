@@ -270,7 +270,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    /*
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -302,6 +302,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    */
     
     private void OnTriggerStay(Collider other)
     {
@@ -322,7 +323,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Get_Damage(int iDamage)
+    public void Get_Damage(int iDamage, GameObject damager)
     {
         currentHp -= iDamage;
         UIManager.Instance.ChangeHealth();

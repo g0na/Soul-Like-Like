@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
 
     private float moveSpeed = 0.4f;
 
+    int enemyDamage = 10;
     bool isPlayerCloseEnough = false;
     float attackRange = 1.1f;
     public float distanceToPlayer;
@@ -77,6 +78,7 @@ public class Enemy : MonoBehaviour
             {
                 if (col.CompareTag("Player"))
                 {
+                    col.GetComponent<PlayerController>().Get_Damage(enemyDamage, this.gameObject);
                     // Debug.Log("플레이어 공격");
                 }
             }
