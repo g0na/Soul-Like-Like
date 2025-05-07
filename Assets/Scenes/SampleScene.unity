@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17508788, g: 0.08376393, b: 0.08319863, a: 1}
+  m_IndirectSpecularColor: {r: 0.17508823, g: 0.08376233, b: 0.08320326, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3052,7 +3052,7 @@ MonoBehaviour:
   sword: {fileID: 1196039940}
   Camera: {fileID: 963194225}
   maxHp: 100
-  currentHp: 10
+  currentHp: 100
 --- !u!54 &1609699694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4005,6 +4005,10 @@ PrefabInstance:
     - target: {fileID: 4393693063583939940, guid: 3f01b1d95d29b4c4f8214764bc5c86af, type: 3}
       propertyPath: m_Name
       value: zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 6689783813687063562, guid: 3f01b1d95d29b4c4f8214764bc5c86af, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8788040730274579944, guid: 3f01b1d95d29b4c4f8214764bc5c86af, type: 3}
       propertyPath: m_LocalPosition.x
