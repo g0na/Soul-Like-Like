@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking;
     [SerializeField]    
     public bool isAlive;
+    private bool isParrying = false;
+    private float parryDuration = 1f; // 패링 지속 시간
     [SerializeField] 
     public Transform groundCheck;
 
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour
                 Move();
             }
             MainAttack();
+            Parry();
             Jump();
             Block();
             Dodge();
@@ -90,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (isAttacking)
+        if (isAttacking || isParrying)
         {
             return;
         }
@@ -295,10 +298,35 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // 데미지 적용
-                currentHp -= 10;
-                UIManager.Instance.ChangeHealth();
+                Get_Damage(10);
             }
         }
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        // 패링 상태가 아니면 무시
+        if (!isParrying) return;
+        
+        // Enemy 태그를 가진 오브젝트인지 확인
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            
+            // Enemy가 null이 아니고 패링 가능 상태인지 확인
+            if (enemy != null && enemy.isParriable)
+            {
+                // 패링 성공 처리
+                Debug.Log("패링 성공");
+            }
+        }
+    }
+
+    void Get_Damage(int iDamage)
+    {
+        currentHp -= iDamage;
+        UIManager.Instance.ChangeHealth();
+
     }
 
     void Block()
@@ -397,6 +425,25 @@ public class PlayerController : MonoBehaviour
         sword.attackArea.enabled = false;
     }
 
+    void Parry()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (isParrying) return;
+            
+            anim.SetTrigger("Parry");
+            isParrying = true;
+            
+            StartCoroutine(Parry_End());
+        }
+    }
+    
+    IEnumerator Parry_End()
+    {
+        yield return new WaitForSeconds(parryDuration);
+        isParrying = false;
+    }
+    
     private void OutofMap()
     {
         if (this.transform.position.y < -12f)
