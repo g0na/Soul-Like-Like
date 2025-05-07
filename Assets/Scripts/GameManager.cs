@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public string currentRegion;
 
+    public Transform spawnPotint;
+
     void Awake()
     {
         if(null == instance)
@@ -54,6 +56,12 @@ public class GameManager : MonoBehaviour
 
     public void ReSpawn()
     {
-        Debug.Log("ReSpawn");
+        player.transform.position = spawnPotint.position;
+        player.GetComponent<PlayerController>().currentHp = player.GetComponent<PlayerController>().maxHp;
+        player.GetComponent<PlayerController>().isAlive = true;
+        player.GetComponent<PlayerController>().anim.Play("Idle");
+        UIManager.Instance.ChangeHealth();
     }
+
+
 }

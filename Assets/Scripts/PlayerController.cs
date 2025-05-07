@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isDodging;
     public bool isAttacking;
-    private bool isAlive;
+    [SerializeField]    
+    public bool isAlive;
     [SerializeField] 
     public Transform groundCheck;
 
@@ -38,7 +39,8 @@ public class PlayerController : MonoBehaviour
     private Enemy _enemy;
     
     Rigidbody rb;
-    Animator anim;
+    [SerializeField]
+    public Animator anim;
     Attack _attack;
 
     public GameObject Camera;
@@ -294,6 +296,7 @@ public class PlayerController : MonoBehaviour
 
                 // 데미지 적용
                 currentHp -= 10;
+                UIManager.Instance.ChangeHealth();
             }
         }
     }

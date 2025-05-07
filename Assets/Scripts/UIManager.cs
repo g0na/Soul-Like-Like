@@ -40,7 +40,8 @@ public class UIManager : MonoBehaviour
 
     public void ChangeHealth()
     {
-        hpBar.value = GameManager.Instance.player.GetComponent<PlayerController>().currentHp / GameManager.Instance.player.GetComponent<PlayerController>().maxHp;
+        hpBar.value = (float)GameManager.Instance.player.GetComponent<PlayerController>().currentHp / (float)GameManager.Instance.player.GetComponent<PlayerController>().maxHp;
+        Debug.Log(hpBar.value);
     }
 
 
