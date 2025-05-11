@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. From: Unity Script
             isJumping = true;
             isGrounded = false;
-            anim.SetTrigger("Jumping");            
+            anim.SetTrigger("Jumping");     
         }
     }
 
@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator DelayedFallAnimation()
     {
-        yield return new WaitForSeconds(0.25f); // 1초 대기
+        yield return new WaitForSeconds(0.25f);
         if (!isGrounded) // 여전히 지면에 닿아있지 않은 경우에만 실행
         {
             anim.SetTrigger("Falling");
@@ -270,7 +270,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    /*
+
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -278,31 +278,8 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             isGrounded = true;
         }
-
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            _enemy = other.gameObject.GetComponent<Enemy>();
-
-            if (_enemy != null)
-            {
-                // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
-                if (lastRaycastHitEnemy == other.gameObject)
-                {
-                    // 정면 충돌
-                    anim.SetTrigger("Hit_Front");
-                }
-                else
-                {
-                    // 후면 충돌
-                    anim.SetTrigger("Hit_Back");
-                }
-
-                // 데미지 적용
-                Get_Damage(10);
-            }
-        }
     }
-    */
+
     
     private void OnTriggerStay(Collider other)
     {
