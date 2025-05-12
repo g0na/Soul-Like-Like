@@ -257,23 +257,6 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Falling");
     }
 
-    void ShootRaycast()
-    {
-        Ray ray = new Ray(transform.position + new Vector3(0f, 0.75f, 0f), transform.forward);
-        RaycastHit hit;
-
-        Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
-
-        lastRaycastHitEnemy = null;
-
-        if (Physics.Raycast(ray, out hit, 2f))
-        {
-            if (hit.transform.CompareTag("Enemy"))
-            {
-                lastRaycastHitEnemy = hit.transform.gameObject;
-            }
-        }
-    }
 
     void OnCollisionEnter(Collision other)
     {
@@ -282,6 +265,26 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             isGrounded = true;
         }
+
+        //if (other.gameObject.CompareTag("Enemy"))
+        //{
+        //    _enemy = other.gameObject.GetComponent<Enemy>();
+
+        //    if (_enemy != null)
+        //    {
+        //        // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
+        //        if (lastRaycastHitEnemy == other.gameObject)
+        //        {
+        //            // 정면 충돌
+        //            anim.SetTrigger("Hit_Front");
+        //        }
+        //        else
+        //        {
+        //            // 후면 충돌
+        //            anim.SetTrigger("Hit_Back");
+        //        }
+        //    }
+        //}
     }
 
     
@@ -303,12 +306,57 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    void ShootRaycast()
+    {
+        Ray ray = new Ray(transform.position + new Vector3(0f, 0.75f, 0f), transform.forward);
+        RaycastHit hit;
+
+        Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
+
+        lastRaycastHitEnemy = null;
+
+        if (Physics.Raycast(ray, out hit, 2f))
+        {
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                lastRaycastHitEnemy = hit.transform.gameObject;
+            }
+        }
+    }
 
     public void Get_Damage(int iDamage, GameObject damager)
     {
-        currentHp -= iDamage;
-        UIManager.Instance.ChangeHealth();
+        if (damager.gameObject.CompareTag("Enemy"))
+        {
+            _enemy = damager.gameObject.GetComponent<Enemy>();
 
+            if (_enemy != null)
+            {
+                // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
+                if (lastRaycastHitEnemy == damager.gameObject)
+                {
+                    // 정면 충돌
+                    anim.SetTrigger("Hit_Front");
+                    currentHp -= iDamage;
+                    StartCoroutine(After_Get_Damaged());
+                }
+                else
+                {
+                    // 후면 충돌
+                    anim.SetTrigger("Hit_Back");
+                    currentHp -= iDamage;
+                    StartCoroutine(After_Get_Damaged());
+                }
+            }
+        }
+        UIManager.Instance.ChangeHealth();
+    }
+
+    IEnumerator After_Get_Damaged()
+    {
+        gameObject.tag = "Invincible";
+        yield return new WaitForSeconds(1.0f);
+        gameObject.tag = "Player";
     }
 
     void Block()

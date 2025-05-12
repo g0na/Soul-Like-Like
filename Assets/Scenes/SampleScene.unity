@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17508788, g: 0.08376393, b: 0.08319863, a: 1}
+  m_IndirectSpecularColor: {r: 0.17508823, g: 0.08376233, b: 0.08320326, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2256,8 +2256,8 @@ MonoBehaviour:
   enemyCognitionRange: {fileID: 0}
   distanceToPlayer: 10
   isParriable: 0
-  forwardOffset: 0.4
-  verticalOffset: 1
+  forwardOffset: 0.77
+  verticalOffset: 0.05
 --- !u!1 &1159468352
 GameObject:
   m_ObjectHideFlags: 0
