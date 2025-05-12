@@ -48,6 +48,9 @@ public class PlayerController : MonoBehaviour
     public GameObject Camera;
     public int maxHp;
     public int currentHp;
+
+    [HideInInspector]
+    public bool isBonFire;
     
     // Start is called before the first frame update
     void Start()
@@ -77,6 +80,7 @@ public class PlayerController : MonoBehaviour
             OutofMap();
             ShootRaycast();
             Death();
+            Interaction();
         }
     }
 
@@ -430,5 +434,23 @@ public class PlayerController : MonoBehaviour
             currentHp = 0;
             UIManager.Instance.ChangeHealth();
         }
+    }
+
+    void Interaction()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isBonFire)
+            {
+                Rest();
+                Debug.Log("Rest");
+            }
+        }
+    }
+
+    void Rest()
+    {
+        currentHp = maxHp;
+        UIManager.Instance.ChangeHealth();
     }
 }

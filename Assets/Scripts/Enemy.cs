@@ -79,6 +79,7 @@ public class Enemy : MonoBehaviour
                 if (col.CompareTag("Player"))
                 {
                     col.GetComponent<PlayerController>().Get_Damage(enemyDamage, this.gameObject);
+                    return;
                     // Debug.Log("플레이어 공격");
                 }
             }
