@@ -302,6 +302,7 @@ public class PlayerController : MonoBehaviour
             if (enemy != null && enemy.isParriable)
             {
                 // 패링 성공 처리
+                enemy.GetCounterAttack();
                 Debug.Log("패링 성공");
             }
         }

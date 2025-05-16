@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
 
     private bool isDead = false;
 
+    private bool isStunned = false;
+    public GameObject stunnedObject;
+
     // [HideInInspector]
     public bool isParriable = false;
 
@@ -37,7 +40,14 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        Attack();
+        if (isStunned)
+        { 
+        }
+        else
+        {
+            CloseEnough();
+            Follow();
+        }
         CheckDeath();
     }
 
@@ -49,9 +59,7 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Player Detected");
             isPlayerCloseEnough = true;
-            StartCoroutine(Follow());
-            anim.SetBool("walk", true);
-            // TODO: Attack Player
+            
         }
     }
 
@@ -64,24 +72,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void CloseEnough()
     {
         if (isPlayerCloseEnough && distanceToPlayer <= attackRange)
         {
             StartCoroutine(OpenParryWindow());
             anim.SetTrigger("attack");
+        }
+    }
 
-            Vector3 attackOrigin = transform.position + transform.forward * forwardOffset + Vector3.up * verticalOffset;
-            Collider[] hitColliders = Physics.OverlapSphere(attackOrigin, attackCheckRadius);
+    private void Attack()
+    {
+        Vector3 attackOrigin = transform.position + transform.forward * forwardOffset + Vector3.up * verticalOffset;
+        Collider[] hitColliders = Physics.OverlapSphere(attackOrigin, attackCheckRadius);
 
-            foreach (Collider col in hitColliders)
+        foreach (Collider col in hitColliders)
+        {
+            if (col.CompareTag("Player"))
             {
-                if (col.CompareTag("Player"))
-                {
-                    col.GetComponent<PlayerController>().Get_Damage(enemyDamage, this.gameObject);
-                    return;
-                    // Debug.Log("플레이어 공격");
-                }
+                col.GetComponent<PlayerController>().Get_Damage(enemyDamage, this.gameObject);
+                return;
             }
         }
     }
@@ -100,19 +110,27 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    IEnumerator Follow()
+    void Follow()
     {
-        while (isPlayerCloseEnough)
+        if (isPlayerCloseEnough)
         {
+            anim.SetBool("walk", true);
             this.transform.LookAt(GameManager.Instance.player.transform);
             this.transform.position += this.transform.forward * moveSpeed * Time.deltaTime;
             distanceToPlayer = Vector3.Distance(transform.position, GameManager.Instance.player.transform.position);
-            yield return new WaitForFixedUpdate();
         }
     }
 
     public void Hit(int dmg)
     {
+        try
+        {
+            anim.Play("Pose");
+        }
+        catch
+        {
+            // 애니메이션이 없을 경우 무시하고 넘어감
+        }
         this.hp -= dmg;
         UIManager.Instance.ShowDamageText(dmg);
     }
@@ -131,5 +149,26 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("isDead");
             Destroy(this.gameObject, 2f);
         }
+    }
+
+    public void GetCounterAttack()
+    {
+        try
+        {
+            anim.Play("Pose");
+        }
+        catch
+        {
+            // 애니메이션이 없을 경우 무시하고 넘어감
+        }
+        StartCoroutine(StartStun());
+    }
+    IEnumerator StartStun()
+    {
+        isStunned = true;
+        stunnedObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        isStunned = false;
+        stunnedObject.SetActive(false);
     }
 }

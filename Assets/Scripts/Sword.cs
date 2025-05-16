@@ -10,10 +10,18 @@ public class Sword : MonoBehaviour
     private PlayerController _playerController;
     private Enemy _enemy;
 
+    bool isHit = false;
+
     public void Use()
     {
+        AttackReset();
         StopCoroutine("Swing");
         StartCoroutine("Swing");
+    }
+
+    private void AttackReset()
+    {
+        isHit = false;
     }
 
     private IEnumerator Swing()
@@ -33,9 +41,10 @@ public class Sword : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             _enemy = other.GetComponent<Enemy>();
-            if (_enemy != null)
+            if (_enemy != null && !isHit)
             {
                 _enemy.Hit(damage);
+                isHit = true;
             }
         }
     }
