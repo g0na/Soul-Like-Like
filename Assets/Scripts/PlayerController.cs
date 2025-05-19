@@ -500,6 +500,18 @@ public class PlayerController : MonoBehaviour
     void Rest()
     {
         currentHp = maxHp;
+        anim.SetBool("Sitting",true);
         UIManager.Instance.ChangeHealth();
+
+        // Time.timeScale = 0f; // 게임 일시 정지
+        GameManager.Instance.isGamePaused = true;
+        // UIManager.Instance.ShowRestPanel();
+
+
+    }
+
+    public void RestEnd()
+    {
+        //
     }
 }

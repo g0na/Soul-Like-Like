@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public Transform spawnPotint;
 
+    public bool isGamePaused;
+
     void Awake()
     {
         if(null == instance)
