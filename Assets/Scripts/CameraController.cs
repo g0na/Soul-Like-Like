@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -19,6 +20,9 @@ public class CameraController : MonoBehaviour
     private float mouseX;
     private float mouseY;
 
+    bool isStop = false;
+
+
     public GameObject playerPosition;
 
     public Vector3 initialCameraPosition = new Vector3(0, 1.2f, -2f);
@@ -26,11 +30,20 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         InitCamera();
-    }    
+    }
     void Update()
     {
-        CameraMove();
-        CameraFollow();
+        if (isStop)
+        {
+            return;
+
+        }
+        else
+        {
+            CameraMove();
+            CameraFollow();
+        }
+
     }
     private void InitCamera()
     {
@@ -54,5 +67,29 @@ public class CameraController : MonoBehaviour
         // transform.position = playerPosition.transform.position + new Vector3(-Mathf.Sin(mouseX) * radius, mouseY, (1- (Mathf.Sin(mouseX) * Mathf.Sin(mouseX))) * radius * Mathf.Cos(mouseX));
 
         transform.position = playerPosition.transform.position + new Vector3(x, mouseY, z);
+    }
+
+    public void SetRestCamera()
+    {
+        isStop = true;
+        StartCoroutine(MoveCamera());
+    }
+
+    IEnumerator MoveCamera()
+    {
+        Vector3 targetPosition = playerPosition.transform.position + new Vector3(0, 2f, 6f);
+        Vector3 startPosition = transform.position;
+
+
+        float time = 0.5f;
+        float t = 0;
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t / time);
+            Quaternion targetRotation = Quaternion.LookRotation(playerPosition.transform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, t / time);
+            yield return null;
+        }
     }
 }

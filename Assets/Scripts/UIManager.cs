@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,6 +16,8 @@ public class UIManager : MonoBehaviour
     public GameObject continueText;
 
     private bool isShowingRegionText = false;
+
+    public GameObject restPanel;
 
     void Awake()
     {
@@ -161,5 +164,10 @@ public class UIManager : MonoBehaviour
         continueText.SetActive(false);
         GameManager.Instance.ReSpawn();
         deadPanel.GetComponent<Button>().onClick.RemoveListener(OnClickDeadPanel);
+    }
+
+    public void ShowRestPanel()
+    {
+        restPanel.SetActive(true);
     }
 }

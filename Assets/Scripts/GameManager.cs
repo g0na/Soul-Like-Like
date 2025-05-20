@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     private static GameManager instance = null;
-
+    public GameObject mainCamera;
     public GameObject player;
     [SerializeField]
     public string currentRegion;
@@ -65,5 +65,15 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.ChangeHealth();
     }
 
+
+    public void Rest()
+    {
+        mainCamera.GetComponent<CameraController>().SetRestCamera();
+        UIManager.Instance.ShowRestPanel();
+        // Time.timeScale = 0f; // 게임 일시 정지
+        isGamePaused = true;
+    }
+
+   
 
 }
