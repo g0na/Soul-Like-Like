@@ -170,4 +170,13 @@ public class UIManager : MonoBehaviour
     {
         restPanel.SetActive(true);
     }
+    public void HideRestPanel()
+    {
+        restPanel.SetActive(false);
+    }
+
+    public void OnClickEndRestButton()
+    {
+        GameManager.Instance.EndRest();
+    }
 }

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public Transform spawnPotint;
 
-    public bool isGamePaused;
+    public bool isResting;
 
     void Awake()
     {
@@ -71,7 +71,15 @@ public class GameManager : MonoBehaviour
         mainCamera.GetComponent<CameraController>().SetRestCamera();
         UIManager.Instance.ShowRestPanel();
         // Time.timeScale = 0f; // 게임 일시 정지
-        isGamePaused = true;
+        isResting = true;
+    }
+
+    public void EndRest()
+    {
+        mainCamera.GetComponent<CameraController>().isStop = false;
+        UIManager.Instance.HideRestPanel();
+        isResting = false;
+        player.GetComponent<PlayerController>().anim.SetBool("Sitting", false);
     }
 
    

@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     private float mouseX;
     private float mouseY;
 
-    bool isStop = false;
+    public bool isStop = false;
 
 
     public GameObject playerPosition;

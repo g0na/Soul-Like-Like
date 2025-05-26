@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class BonFire : MonoBehaviour
 {
+
+    public GameObject interactHint; 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerController>().isBonFire = true;
+            interactHint.SetActive(true);
         }
     }
 
@@ -17,6 +21,7 @@ public class BonFire : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerController>().isBonFire = false;
+            interactHint.SetActive(false);
         }
     }
 
