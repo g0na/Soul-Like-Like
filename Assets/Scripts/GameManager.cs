@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     {
         mainCamera.GetComponent<CameraController>().SetRestCamera();
         UIManager.Instance.ShowRestPanel();
+        spawnPotint.position = player.transform.position; // 현재 플레이어 위치를 재생성 지점으로 설정
         // Time.timeScale = 0f; // 게임 일시 정지
         isResting = true;
     }
