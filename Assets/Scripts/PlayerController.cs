@@ -265,26 +265,6 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             isGrounded = true;
         }
-
-        //if (other.gameObject.CompareTag("Enemy"))
-        //{
-        //    _enemy = other.gameObject.GetComponent<Enemy>();
-
-        //    if (_enemy != null)
-        //    {
-        //        // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
-        //        if (lastRaycastHitEnemy == other.gameObject)
-        //        {
-        //            // 정면 충돌
-        //            anim.SetTrigger("Hit_Front");
-        //        }
-        //        else
-        //        {
-        //            // 후면 충돌
-        //            anim.SetTrigger("Hit_Back");
-        //        }
-        //    }
-        //}
     }
 
     
@@ -325,6 +305,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //public void Get_Damage(int iDamage, GameObject damager)
+    //{
+    //    if (damager.gameObject.CompareTag("Enemy"))
+    //    {
+    //        _enemy = damager.gameObject.GetComponent<Enemy>();
+
+    //        if (_enemy != null)
+    //        {
+    //            // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
+    //            if (lastRaycastHitEnemy == damager.gameObject)
+    //            {
+    //                // 정면 충돌
+    //                anim.SetTrigger("Hit_Front");
+    //                currentHp -= iDamage;
+    //                StartCoroutine(After_Get_Damaged());
+    //            }
+    //            else
+    //            {
+    //                // 후면 충돌
+    //                anim.SetTrigger("Hit_Back");
+    //                currentHp -= iDamage;
+    //                StartCoroutine(After_Get_Damaged());
+    //            }
+    //        }
+    //    }
+    //    UIManager.Instance.ChangeHealth();
+    //}
+    
+    // 애니메이터의 상태를 기준으로 isBlocking을 판단
+    public bool isBlocking
+    {
+        get
+        {
+            return anim.GetBool("Blocking") || anim.GetBool("BlockingRun");
+        }
+    }
+
     public void Get_Damage(int iDamage, GameObject damager)
     {
         if (damager.gameObject.CompareTag("Enemy"))
@@ -334,24 +351,33 @@ public class PlayerController : MonoBehaviour
             if (_enemy != null)
             {
                 // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
-                if (lastRaycastHitEnemy == damager.gameObject)
+                // 동시에 방어 중인지도 체크
+                if (isBlocking && IsFacing(damager.transform))
                 {
-                    // 정면 충돌
-                    anim.SetTrigger("Hit_Front");
-                    currentHp -= iDamage;
-                    StartCoroutine(After_Get_Damaged());
+                    //iDamage = Mathf.Max(0, iDamage - 10);
+                    return;                    
                 }
                 else
                 {
-                    // 후면 충돌
-                    anim.SetTrigger("Hit_Back");
-                    currentHp -= iDamage;
-                    StartCoroutine(After_Get_Damaged());
+                    // 정면/후면 충돌에 따라 애니메이션 실행
+                    anim.SetTrigger(lastRaycastHitEnemy == damager ? "Hit_Front" : "Hit_Back");
                 }
+
+                currentHp -= iDamage;
+                StartCoroutine(After_Get_Damaged());
             }
         }
         UIManager.Instance.ChangeHealth();
     }
+
+    // 정면 방어만 막을 수 있도록 하는 함수, 방어 중이더라도 뒤에서 맞으면 안되니깐
+    private bool IsFacing(Transform enemy)
+    {
+        Vector3 directionToEnemy = (enemy.position - transform.position).normalized;
+        float dot = Vector3.Dot(transform.forward, directionToEnemy);
+        return dot > 0.7f; // 시야 정면 약180도 정도
+    }
+
 
     IEnumerator After_Get_Damaged()
     {
