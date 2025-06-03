@@ -146,7 +146,14 @@ public class Enemy : MonoBehaviour
     {
         if (hp <= 0)
         {
-            anim.SetTrigger("isDead");
+            var animParameters = anim.parameters;
+            foreach (var param in anim.parameters)
+            {
+                if(param.name == "isDead")
+                {
+                    anim.SetTrigger("isDead");
+                }
+            }            
             Destroy(this.gameObject, 2f);
         }
     }

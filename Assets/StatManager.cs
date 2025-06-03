@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class StatManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void OnClickHPUp()
     {
-        
+
+    }
+    private void OnClickHPDown()
+    {
+
+    }
+    private void OnClickAttackUp()
+    {
+
+    }
+    private void OnClickAttackDown()
+    {
+
     }
 }
