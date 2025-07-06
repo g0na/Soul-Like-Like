@@ -153,7 +153,8 @@ public class Enemy : MonoBehaviour
                 {
                     anim.SetTrigger("isDead");
                 }
-            }            
+            }
+            StatManager.instance.statPoints += 1;
             Destroy(this.gameObject, 2f);
         }
     }

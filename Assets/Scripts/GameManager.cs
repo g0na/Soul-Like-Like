@@ -15,9 +15,11 @@ public class GameManager : MonoBehaviour
 
     public bool isResting;
 
+    public List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
+
     void Awake()
     {
-        if(null == instance)
+        if (null == instance)
         {
             instance = this;
         }
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public static GameManager Instance
@@ -83,6 +85,6 @@ public class GameManager : MonoBehaviour
         player.GetComponent<PlayerController>().anim.SetBool("Sitting", false);
     }
 
-   
+
 
 }

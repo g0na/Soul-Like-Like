@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject restPanel;
 
+    public GameObject bossHpBar;
+
     void Awake()
     {
         if (null == instance)
@@ -178,5 +180,10 @@ public class UIManager : MonoBehaviour
     public void OnClickEndRestButton()
     {
         GameManager.Instance.EndRest();
+    }
+
+    internal void UpdateStatPoints()
+    {
+        
     }
 }
