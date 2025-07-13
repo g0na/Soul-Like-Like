@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour
     {
         currentRegion = regionName;
         UIManager.Instance.ChangeRegionName();
+
+        if(regionName == "BossRoom")
+        {
+            StartBossMode();
+        }
     }
 
     public void ReSpawn()
@@ -83,6 +88,16 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.HideRestPanel();
         isResting = false;
         player.GetComponent<PlayerController>().anim.SetBool("Sitting", false);
+    }
+
+    public void StartBossMode()
+    {
+        UIManager.Instance.ShowBossHpBar();
+    }
+
+    public void EndBossMode()
+    {
+        UIManager.Instance.HideBossHpBar();
     }
 
 

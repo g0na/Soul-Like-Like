@@ -186,4 +186,14 @@ public class UIManager : MonoBehaviour
     {
         
     }
+
+    public void ShowBossHpBar()
+    {
+        bossHpBar.SetActive(true);
+    }
+
+    public void HideBossHpBar()
+    {
+        bossHpBar.SetActive(false);
+    }
 }
