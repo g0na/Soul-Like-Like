@@ -9,6 +9,7 @@ public class Sword : MonoBehaviour
 
     private PlayerController _playerController;
     private Enemy _enemy;
+    private Boss _boss;
 
     bool isHit = false;
 
@@ -44,6 +45,16 @@ public class Sword : MonoBehaviour
             if (_enemy != null && !isHit)
             {
                 _enemy.Hit(damage);
+                isHit = true;
+            }
+        }
+
+        if (other.CompareTag("Boss"))
+        {
+            _boss = other.GetComponent<Boss>();
+            if (_boss != null && !isHit)
+            {
+                _boss.Hit(damage);
                 isHit = true;
             }
         }
