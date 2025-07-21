@@ -29,6 +29,8 @@ public class Boss : MonoBehaviour
         {
             Debug.LogError("Player not found! Make sure the player has the 'Player' tag.");
         }
+
+        anim.SetBool("Idle", true);
     }
 
     void Update()
@@ -39,6 +41,7 @@ public class Boss : MonoBehaviour
         if (hp <= 0)
         {
             isAlive = false;
+            anim.SetBool("Idle", false);
             anim.SetTrigger("Death");
             GetComponent<Collider>().enabled = false; 
             UIManager.Instance.HideBossHpBar();
@@ -65,6 +68,9 @@ public class Boss : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
+        anim.SetBool("Idle", false);
+        anim.SetBool("Walking", true);
+
         // 플레이어 방향으로 부드럽게 회전
         Vector3 direction = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
@@ -77,6 +83,8 @@ public class Boss : MonoBehaviour
     void StopMoving()
     {
         // 이동을 멈춤 (필요에 따라 추가적인 로직 구현)
+        anim.SetBool("Idle", true);
+        anim.SetBool("Walking", false);
     }
 
     private void OnTriggerEnter(Collider other)
