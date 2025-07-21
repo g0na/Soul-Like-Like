@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public int hp = 10;
+    public int max = 100;
+    public int hp = 100;
     public Transform player;
     public float moveSpeed = 2.0f;
     public float rotationSpeed = 3.0f;
@@ -40,6 +41,7 @@ public class Boss : MonoBehaviour
             isAlive = false;
             anim.SetTrigger("Death");
             GetComponent<Collider>().enabled = false; 
+            UIManager.Instance.HideBossHpBar();
             Destroy(this.gameObject, 4.5f);
             return;
         }
@@ -89,5 +91,6 @@ public class Boss : MonoBehaviour
         if (!isAlive) return;
         this.hp -= dmg;
         UIManager.Instance.ShowDamageText(dmg);
+        UIManager.Instance.UpdateBossHpBar((float)hp/max);
     }
 }

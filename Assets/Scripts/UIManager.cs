@@ -196,4 +196,9 @@ public class UIManager : MonoBehaviour
     {
         bossHpBar.SetActive(false);
     }
+
+    public void UpdateBossHpBar(float hp)
+    {
+        bossHpBar.GetComponent<Slider>().value = hp;
+    }
 }
