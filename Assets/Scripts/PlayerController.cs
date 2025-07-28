@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isDodging;
     public bool isAttacking;
-    [SerializeField]    
+    [SerializeField]
     public bool isAlive;
     private bool isParrying = false;
     private float parryDuration = 1f; // 패링 지속 시간
-    [SerializeField] 
+    [SerializeField]
     public Transform groundCheck;
 
     private GameObject lastRaycastHitEnemy = null;
@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour
 
     public Sword sword;
     private Enemy _enemy;
-    
+    private Boss _Boss;
+
     Rigidbody rb;
     [SerializeField]
     public Animator anim;
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public bool isBonFire;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,7 +102,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         bool isOnSlope = IsOnSlope();
@@ -111,7 +112,7 @@ public class PlayerController : MonoBehaviour
         Vector3 arrangedTransformPosition = new Vector3(this.transform.position.x, 0, this.transform.position.z);
         Vector3 arrangedCameraPosition = new Vector3(Camera.transform.position.x, 0, Camera.transform.position.z);
 
-        movementHorizontal = Vector3.Normalize(Vector3.Cross(arrangedCameraPosition - arrangedTransformPosition, this.transform.position - arrangedTransformPosition )) * horizontal;
+        movementHorizontal = Vector3.Normalize(Vector3.Cross(arrangedCameraPosition - arrangedTransformPosition, this.transform.position - arrangedTransformPosition)) * horizontal;
 
         if (CheckNextFrameAngle(moveSpeed) < maxSlopeAngle)
         {
@@ -143,7 +144,7 @@ public class PlayerController : MonoBehaviour
             movement = movementVertical + movementHorizontal;
             rb.useGravity = true;
         }
-        
+
         transform.position += movement * moveSpeed * Time.deltaTime;
 
         // 이동 애니메이션
@@ -157,7 +158,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("BlockingRun", false); // BlockingRun 애니메이션 비활성화
             anim.SetBool("Running", movement != Vector3.zero); // 이동 중이면 Running 애니메이션 실행
         }
-        
+
         // 회전
         if (movement != Vector3.zero) // 키 입력값이 존재할 때
         {
@@ -169,7 +170,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime); // 부드러운 회전
         }
     }
-    
+
     // 경사로 판단 함수
     bool IsOnSlope()
     {
@@ -198,8 +199,8 @@ public class PlayerController : MonoBehaviour
     void GroundCheck()
     {
         Vector3 boxSize = new Vector3(transform.lossyScale.x - 0.4f, 0.1f, transform.lossyScale.z - 0.4f);
-        
-        if(Physics.CheckBox(groundCheck.position, boxSize, Quaternion.identity, Ground))
+
+        if (Physics.CheckBox(groundCheck.position, boxSize, Quaternion.identity, Ground))
         {
             isGrounded = true;
             anim.SetBool("Falling", false);
@@ -222,7 +223,7 @@ public class PlayerController : MonoBehaviour
 
         return 0f;
     }
-    
+
     void Jump()
     {
         if (Input.GetKeyDown(KeyCode.F) && isGrounded && !isDodging && !isAttacking)
@@ -230,7 +231,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Add an instant force impulse to the rigidbody, using its mass. From: Unity Script
             isJumping = true;
             isGrounded = false;
-            anim.SetTrigger("Jumping");     
+            anim.SetTrigger("Jumping");
         }
     }
 
@@ -242,7 +243,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(DelayedFallAnimation());
         }
     }
-    
+
     IEnumerator DelayedFallAnimation()
     {
         yield return new WaitForSeconds(0.25f);
@@ -267,17 +268,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+
     private void OnTriggerStay(Collider other)
     {
         // 패링 상태가 아니면 무시
         if (!isParrying) return;
-        
+
         // Enemy 태그를 가진 오브젝트인지 확인
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();
-            
+
             // Enemy가 null이 아니고 패링 가능 상태인지 확인
             if (enemy != null && enemy.isParriable)
             {
@@ -332,7 +333,7 @@ public class PlayerController : MonoBehaviour
     //    }
     //    UIManager.Instance.ChangeHealth();
     //}
-    
+
     // 애니메이터의 상태를 기준으로 isBlocking을 판단
     public bool isBlocking
     {
@@ -349,6 +350,30 @@ public class PlayerController : MonoBehaviour
             _enemy = damager.gameObject.GetComponent<Enemy>();
 
             if (_enemy != null)
+            {
+                // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
+                // 동시에 방어 중인지도 체크
+                if (isBlocking && IsFacing(damager.transform))
+                {
+                    //iDamage = Mathf.Max(0, iDamage - 10);
+                    return;                    
+                }
+                else
+                {
+                    // 정면/후면 충돌에 따라 애니메이션 실행
+                    anim.SetTrigger(lastRaycastHitEnemy == damager ? "Hit_Front" : "Hit_Back");
+                }
+
+                currentHp -= iDamage;
+                StartCoroutine(After_Get_Damaged());
+            }
+        }
+
+        if (damager.gameObject.CompareTag("Boss"))
+        {
+            _Boss = damager.gameObject.GetComponent<Boss>();
+
+            if (_Boss != null)
             {
                 // 현재 충돌한 Enemy가 Raycast로 감지된 Enemy와 같은지 확인
                 // 동시에 방어 중인지도 체크

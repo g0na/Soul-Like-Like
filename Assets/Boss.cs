@@ -14,6 +14,7 @@ public class Boss : MonoBehaviour
 
     int bossDamage = 20;
     private bool isAlive = true;
+    private bool isAttacking = false;
 
     Animator anim;
 
@@ -22,13 +23,7 @@ public class Boss : MonoBehaviour
         anim = GetComponent<Animator>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
-        {
             player = playerObject.transform;
-        }
-        else
-        {
-            Debug.LogError("Player not found! Make sure the player has the 'Player' tag.");
-        }
 
         anim.SetBool("Idle", true);
     }
@@ -43,7 +38,7 @@ public class Boss : MonoBehaviour
             isAlive = false;
             anim.SetBool("Idle", false);
             anim.SetTrigger("Death");
-            GetComponent<Collider>().enabled = false; 
+            //GetComponent<Collider>().enabled = false; 
             UIManager.Instance.HideBossHpBar();
             Destroy(this.gameObject, 4.5f);
             return;
@@ -68,6 +63,8 @@ public class Boss : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
+        if (isAttacking) return;
+
         anim.SetBool("Idle", false);
         anim.SetBool("Walking", true);
 
@@ -82,21 +79,56 @@ public class Boss : MonoBehaviour
 
     void StopMoving()
     {
-        // 이동을 멈춤 (필요에 따라 추가적인 로직 구현)
+        if (isAttacking) return;
+
         anim.SetBool("Idle", true);
         anim.SetBool("Walking", false);
+
+        // 공격 애니메이션이 재생 중이 아닐 때만 공격 시도
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1") && 
+            !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+        {
+            StartCoroutine(Attack());
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        isAttacking = true;
+        anim.SetBool("Idle", false);
+
+        // 랜덤하게 Attack1 또는 Attack2
+        if (UnityEngine.Random.Range(0, 2) == 0)
+        {
+            anim.SetBool("Walking", false);
+            anim.SetTrigger("Attack1");
+        }
+        else
+        {
+            anim.SetBool("Walking", false);
+            anim.SetTrigger("Attack2");
+        }
+
+        // 공격 애니메이션이 끝날 때까지 대기
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+
+        isAttacking = false;
+        anim.SetBool("Idle", true);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            other.GetComponent<PlayerController>().Get_Damage(20, this.gameObject);
             Debug.Log("Player Hit");
         }
     }
     public void Hit(int dmg)
     {
-        if (!isAlive) return;
+        if (!isAlive) 
+            return;
+
         this.hp -= dmg;
         UIManager.Instance.ShowDamageText(dmg);
         UIManager.Instance.UpdateBossHpBar((float)hp/max);
