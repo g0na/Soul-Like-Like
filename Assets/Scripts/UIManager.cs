@@ -21,6 +21,12 @@ public class UIManager : MonoBehaviour
 
     public GameObject bossHpBar;
 
+    [Header("Stat Points")]
+    public TMPro.TextMeshProUGUI statPointText;
+    public TMPro.TextMeshProUGUI hpPointText;
+    public TMPro.TextMeshProUGUI attackPointText;
+
+
     void Awake()
     {
         if (null == instance)
@@ -182,10 +188,12 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.EndRest();
     }
 
-    internal void UpdateStatPoints()
+    public void UpdateStatPoints()
     {
-        
-    }
+        statPointText.text = "Stat Point : " + StatManager.instance.statPoints.ToString();
+        hpPointText.text = "HP : " + StatManager.instance.hpPoint.ToString();
+        attackPointText.text = "ATK : " + StatManager.instance.attackPoint.ToString();
+}
 
     public void ShowBossHpBar()
     {

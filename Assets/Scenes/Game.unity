@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17508823, g: 0.08376233, b: 0.08320326, a: 1}
+  m_IndirectSpecularColor: {r: 0.17508788, g: 0.08376393, b: 0.08319863, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4230,7 +4230,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -111.5625, w: -32.984375}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4393,7 +4393,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 681702518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1396801182}
+        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
+        m_MethodName: OnClickHPUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &681702518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4648,7 +4660,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 694695505}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1396801182}
+        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
+        m_MethodName: OnClickAttackUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &694695505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6997,6 +7021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b827ce69920fca4a9740514ea8f669e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  max: 100
   hp: 20
   player: {fileID: 0}
   moveSpeed: 2
@@ -7076,6 +7101,9 @@ MonoBehaviour:
   continueText: {fileID: 568371474}
   restPanel: {fileID: 473115535}
   bossHpBar: {fileID: 515486958}
+  statPointText: {fileID: 1859898293}
+  hpPointText: {fileID: 1379044738}
+  attackPointText: {fileID: 648026960}
 --- !u!4 &1207620249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 1679506d96acb1447aa6870479416bf8, type: 3}
@@ -7659,7 +7687,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -9.972656, y: 0, z: -78.31641, w: -39.203125}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8274,7 +8302,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1518558550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1396801182}
+        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
+        m_MethodName: OnClickHPDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1518558550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8824,7 +8864,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1618912908}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1396801182}
+        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
+        m_MethodName: OnClickAttackDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1618912908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10536,8 +10588,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

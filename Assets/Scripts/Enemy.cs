@@ -146,6 +146,8 @@ public class Enemy : MonoBehaviour
     {
         if (hp <= 0)
         {
+            isDead = true;
+            if (isDead) return; // 이미 죽은 상태라면 아무것도 하지 않음
             var animParameters = anim.parameters;
             foreach (var param in anim.parameters)
             {
@@ -155,6 +157,7 @@ public class Enemy : MonoBehaviour
                 }
             }
             StatManager.instance.statPoints += 1;
+            UIManager.Instance.UpdateStatPoints();
             Destroy(this.gameObject, 2f);
         }
     }

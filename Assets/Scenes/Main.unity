@@ -2399,6 +2399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992484ee1750706438cbcbc882965444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnim: {fileID: 1609699699}
 --- !u!1001 &465975696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3227,6 +3228,11 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.2, z: 0}
+--- !u!95 &1609699699 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 609658112, guid: 31a06acdb2cf9064a94ee7f80a878815, type: 3}
+  m_PrefabInstance: {fileID: 301780948}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1621392826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4334314813405729788, guid: edccbf15fadd9704cb7a2020a492b120, type: 3}

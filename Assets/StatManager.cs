@@ -27,42 +27,46 @@ public class StatManager : MonoBehaviour
     {
         playerController = GameManager.Instance.player.GetComponent<PlayerController>();
     }
-    private void OnClickHPUp()
+    public void OnClickHPUp()
     {
         if(statPoints > 0)
         {
             playerController.maxHp += hpPoint * 5;
             statPoints--;
+            hpPoint++;
             UIManager.Instance.UpdateStatPoints();
         }
     }
-    private void OnClickHPDown()
+    public void OnClickHPDown()
     {
         if (hpPoint > 0) 
         {
             playerController.maxHp -= hpPoint * 5;
             statPoints++;
-            UIManager.Instance.UpdateStatPoints();
             hpPoint--;
+            UIManager.Instance.UpdateStatPoints();
+            
         }
     }
-    private void OnClickAttackUp()
+    public void OnClickAttackUp()
     {
         if (statPoints > 0)
         {
             playerController.sword.damage += attackPoint;
             statPoints--;
+            attackPoint++;
             UIManager.Instance.UpdateStatPoints();
         }
     }
-    private void OnClickAttackDown()
+    public void OnClickAttackDown()
     {
         if (attackPoint > 0)
         {
             playerController.sword.damage -= attackPoint;
             statPoints++;
-            UIManager.Instance.UpdateStatPoints();
             attackPoint--;
+            UIManager.Instance.UpdateStatPoints();
+
         }
     }
 }
